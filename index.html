@@ -1,0 +1,2727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ishan chauhan</title>
+
+    <!-- Tailwind CSS Framework CDN Integration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Typography Fonts Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Global CSS Architecture and Keyframe Animations -->
+    <style>
+        :root {
+            --primary-glow: #00fff5;
+            --secondary-glow: #ff2a5f;
+            --accent-glow: #b026ff;
+            --bg-dark: #03050a;
+            --panel-bg: rgba(10, 15, 30, 0.88);
+            --panel-red-bg: rgba(28, 8, 18, 0.92);
+            --border-cyan: rgba(0, 255, 245, 0.45);
+            --border-red: rgba(255, 42, 95, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(rgba(3, 5, 10, 0.85), rgba(3, 5, 10, 0.85)), 
+                        url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?q=80&w=1920&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            color: #f1f5f9;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        #symbolCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-cyan);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 255, 245, 0.25);
+        }
+
+        .glass-panel-red {
+            background: var(--panel-red-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-red);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 42, 95, 0.35);
+        }
+
+        .glass-panel-purple {
+            background: rgba(15, 10, 30, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(176, 38, 255, 0.6);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(176, 38, 255, 0.35);
+        }
+
+        .glow-cyan { text-shadow: 0 0 18px rgba(0, 255, 245, 0.9); }
+        .glow-red { text-shadow: 0 0 22px rgba(255, 42, 95, 1); }
+        .glow-purple { text-shadow: 0 0 22px rgba(176, 38, 255, 1); }
+
+        @keyframes ownerContinuousGlow {
+            0% { 
+                border-color: rgba(255, 42, 95, 0.8);
+                box-shadow: 0 0 15px rgba(255, 42, 95, 0.6), 0 0 5px rgba(250, 204, 21, 0.4), inset 0 0 10px rgba(255, 42, 95, 0.3); 
+            }
+            50% { 
+                border-color: rgba(250, 204, 21, 1);
+                box-shadow: 0 0 35px rgba(255, 42, 95, 1), 0 0 20px rgba(250, 204, 21, 0.8), inset 0 0 20px rgba(255, 42, 95, 0.6); 
+            }
+            100% { 
+                border-color: rgba(255, 42, 95, 0.8);
+                box-shadow: 0 0 15px rgba(255, 42, 95, 0.6), 0 0 5px rgba(250, 204, 21, 0.4), inset 0 0 10px rgba(255, 42, 95, 0.3); 
+            }
+        }
+
+        .owner-message-card {
+            background: linear-gradient(135deg, rgba(45, 8, 18, 0.95) 0%, rgba(18, 3, 8, 0.98) 100%) !important;
+            border: 2px solid #ff2a5f !important;
+            animation: ownerContinuousGlow 1.5s infinite ease-in-out !important;
+            border-radius: 0.85rem !important;
+            position: relative;
+        }
+
+        .owner-glow-text {
+            color: #ff3366 !important;
+            font-family: 'Orbitron', sans-serif !important;
+            letter-spacing: 0.06em;
+            text-shadow: 0 0 12px rgba(255, 42, 95, 0.9), 0 0 22px rgba(255, 42, 95, 0.6) !important;
+            font-weight: 800 !important;
+        }
+
+        .owner-msg-body {
+            color: #ffe6ec !important;
+            font-family: 'Share Tech Mono', monospace !important;
+            text-shadow: 0 0 8px rgba(255, 42, 95, 0.6) !important;
+            font-size: 0.825rem !important;
+            font-weight: 600;
+        }
+
+        .admin-message-card {
+            background: linear-gradient(135deg, rgba(25, 10, 40, 0.9) 0%, rgba(12, 4, 20, 0.95) 100%) !important;
+            border: 1px solid rgba(176, 38, 255, 0.6) !important;
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.25);
+        }
+        .admin-glow-text {
+            color: #c084fc !important;
+            text-shadow: 0 0 10px rgba(176, 38, 255, 0.8) !important;
+            font-weight: bold;
+        }
+
+        .user-message-card {
+            background: linear-gradient(135deg, rgba(8, 25, 40, 0.9) 0%, rgba(4, 12, 20, 0.95) 100%) !important;
+            border: 1px solid rgba(0, 255, 245, 0.4) !important;
+            box-shadow: 0 0 12px rgba(0, 255, 245, 0.2);
+        }
+        .user-glow-text {
+            color: #22d3ee !important;
+            text-shadow: 0 0 8px rgba(0, 255, 245, 0.6) !important;
+        }
+
+        .btn-cyber {
+            background: linear-gradient(135deg, rgba(0,255,245,0.3) 0%, rgba(0,255,245,0.08) 100%);
+            border: 1px solid #00fff5;
+            box-shadow: 0 0 15px rgba(0, 255, 245, 0.4);
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-cyber:hover {
+            background: #00fff5;
+            color: #03050a;
+            box-shadow: 0 0 30px rgba(0, 255, 245, 1);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyber-red {
+            background: linear-gradient(135deg, rgba(255,42,95,0.35) 0%, rgba(255,42,95,0.1) 100%);
+            border: 1px solid #ff2a5f;
+            box-shadow: 0 0 18px rgba(255, 42, 95, 0.5);
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-cyber-red:hover {
+            background: #ff2a5f;
+            color: #03050a;
+            box-shadow: 0 0 35px rgba(255, 42, 95, 1);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyber-purple {
+            background: linear-gradient(135deg, rgba(176,38,255,0.35) 0%, rgba(176,38,255,0.1) 100%);
+            border: 1px solid #b026ff;
+            box-shadow: 0 0 18px rgba(176, 38, 255, 0.5);
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-cyber-purple:hover {
+            background: #b026ff;
+            color: #ffffff;
+            box-shadow: 0 0 35px rgba(176, 38, 255, 1);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #00fff5;
+            border-bottom: 2px solid #00fff5;
+            background: rgba(0, 255, 245, 0.15);
+            text-shadow: 0 0 15px rgba(0, 255, 245, 0.8);
+        }
+
+        @keyframes flashPulse {
+            0% { opacity: 0; transform: scale(0.85); }
+            30% { opacity: 1; transform: scale(1.05); }
+            70% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.15); }
+        }
+
+        .animate-flash {
+            animation: flashPulse 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes panicFlash {
+            0% { background-color: rgba(255, 0, 0, 0.45); }
+            50% { background-color: rgba(3, 5, 10, 0.95); }
+            100% { background-color: rgba(255, 0, 0, 0.45); }
+        }
+        .panic-mode {
+            animation: panicFlash 0.8s infinite !important;
+        }
+
+        @keyframes radarSweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .radar-sweep {
+            animation: radarSweep 4s linear infinite;
+            transform-origin: center center;
+        }
+
+        .captcha-box {
+            background: repeating-linear-gradient(45deg, #050711, #050711 10px, #0f172a 10px, #0f172a 20px);
+            letter-spacing: 0.35em;
+            user-select: none;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(5, 7, 17, 0.9); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 245, 0.4); border-radius: 4px; }
+
+        .glass { background: rgba(8,13,26,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(0,255,245,.3); box-shadow: 0 0 40px rgba(0,255,245,.08), inset 0 0 25px rgba(0,255,245,.03); }
+        .field { width: 100%; background: rgba(0,0,0,.7); border: 1px solid #334155; border-radius: .65rem; padding: .8rem .9rem; color: #f1f5f9; outline: none; font-family: 'Share Tech Mono', monospace; }
+        .field:focus { border-color: #00fff5; box-shadow: 0 0 0 2px rgba(0,255,245,.12); }
+        .calc-key { padding: .7rem .4rem; border: 1px solid rgba(0,255,245,.25); border-radius: .55rem; background: rgba(15,23,42,.8); color: #e2e8f0; font-family: 'Share Tech Mono', monospace; font-size: 1.1rem; }
+        .calc-key:hover { background: rgba(0,255,245,.18); }
+        .task-row { display:flex; align-items:center; gap:.6rem; padding:.6rem; border:1px solid rgba(148,163,184,.2); border-radius:.6rem; background:rgba(15,23,42,.55); }
+        .task-row.done .task-label { text-decoration:line-through; opacity:.55; }
+    
+
+        /* CYBER COMMAND CENTER — refreshed daily-use UI */
+        :root {
+            --primary-glow: #8b9dff;
+            --secondary-glow: #f871b5;
+            --accent-glow: #a78bfa;
+            --bg-dark: #0b1020;
+            --panel-bg: rgba(20, 27, 48, 0.94);
+            --panel-red-bg: rgba(39, 22, 43, 0.94);
+            --border-cyan: rgba(139, 157, 255, 0.34);
+            --border-red: rgba(248, 113, 181, 0.48);
+        }
+        html { color-scheme: dark; scroll-behavior: smooth; }
+        body {
+            background:
+              radial-gradient(ellipse at 12% 0%, rgba(99,102,241,.22), transparent 42%),
+              radial-gradient(ellipse at 92% 18%, rgba(168,85,247,.14), transparent 38%),
+              linear-gradient(135deg, #0b1020 0%, #10152a 48%, #0b1020 100%) !important;
+            background-attachment: fixed !important;
+            color: #e8ecf8;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.5;
+        }
+        body::before { opacity: .035 !important; background-size: 100% 6px !important; z-index: 1 !important; }
+        #symbolCanvas { opacity: .96 !important; filter: drop-shadow(0 0 5px rgba(0,255,245,.72)); z-index: 2 !important; }
+        ::selection { background: rgba(139,157,255,.38); color: #fff; }
+        /* Keep the Matrix rain clearly visible without covering controls. */
+        #symbolCanvas { pointer-events: none !important; }
+        #dashboardScreen, #loginScreen { position: relative; z-index: 3; }
+        /* Full-screen welcome: keep the message truly centered and readable on every display. */
+        #welcomeMsg {
+            position: fixed !important; inset: 0 !important; z-index: 99999 !important;
+            width: 100vw; height: 100vh; height: 100dvh; min-height: 100vh;
+            display: flex !important; align-items: center !important; justify-content: center !important;
+            box-sizing: border-box; overflow: hidden;
+            background: #000 !important; backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important; padding: clamp(16px, 4vw, 40px);
+            pointer-events: none;
+        }
+        #welcomeMsg.hidden { display: none !important; }
+        #welcomeText {
+            display: block; position: relative; left: auto; top: auto;
+            width: 100%; max-width: 100%; min-width: 0; margin: 0 auto;
+            box-sizing: border-box; white-space: nowrap !important;
+            overflow-wrap: normal; word-break: keep-all; hyphens: none;
+            line-height: 1.2; padding: 18px 2px; text-align: center;
+            /* Fit the full welcome phrase on one line even on narrow screens. */
+            font-size: clamp(14px, 4.7vw, 72px) !important;
+            letter-spacing: clamp(0px, .28vw, 3.5px);
+            opacity: 1 !important; visibility: visible !important;
+            transform-origin: center center;
+        }
+        @media (max-width: 420px) {
+            #welcomeText { font-size: clamp(12px, 4.25vw, 18px) !important; letter-spacing: 0 !important; padding-left: 0; padding-right: 0; }
+        }
+        /* The system-message modal must overlay the page and center in the viewport, not flow at the top. */
+        #customModal {
+            position: fixed !important; inset: 0 !important; z-index: 99990 !important;
+            width: 100vw; min-height: 100vh; min-height: 100dvh;
+            display: flex; align-items: center; justify-content: center;
+            box-sizing: border-box; padding: 20px;
+        }
+        #customModal.hidden { display: none !important; }
+        #customModal > div { width: min(100%, 420px); max-height: calc(100dvh - 40px); overflow-y: auto; margin: auto; }
+        /* Crisp welcome text: keep the glyph edges sharp and animate glow only (no scaling/filter blur). */
+        #welcomeText.owner-welcome {
+            color: #ff294f !important;
+            -webkit-text-fill-color: #ff294f;
+            text-shadow: 0 0 1px #ff1744, 0 0 3px rgba(255,23,68,.98), 0 0 9px rgba(255,23,68,.88), 0 0 22px rgba(255,23,68,.66), 0 0 38px rgba(255,23,68,.35) !important;
+            animation: ownerWelcomeGlow 1.8s ease-in-out infinite alternate;
+            font-weight: 900 !important;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: geometricPrecision;
+        }
+        #welcomeText.member-welcome {
+            color: #8bdcff !important;
+            -webkit-text-fill-color: #8bdcff;
+            text-shadow: 0 0 1px #7dd3fc, 0 0 3px rgba(56,189,248,.95), 0 0 9px rgba(56,189,248,.82), 0 0 22px rgba(56,189,248,.58), 0 0 36px rgba(56,189,248,.30) !important;
+            animation: memberWelcomeGlow 1.8s ease-in-out infinite alternate;
+            font-weight: 900 !important;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: geometricPrecision;
+        }
+        @keyframes ownerWelcomeGlow {
+            from { text-shadow: 0 0 1px #ff1744, 0 0 3px rgba(255,23,68,.9), 0 0 10px rgba(255,23,68,.78), 0 0 22px rgba(255,23,68,.54), 0 0 34px rgba(255,23,68,.25); }
+            to   { text-shadow: 0 0 1px #ff1744, 0 0 4px rgba(255,23,68,1), 0 0 12px rgba(255,23,68,.95), 0 0 26px rgba(255,23,68,.72), 0 0 42px rgba(255,23,68,.40); }
+        }
+        @keyframes memberWelcomeGlow {
+            from { text-shadow: 0 0 1px #7dd3fc, 0 0 3px rgba(56,189,248,.86), 0 0 10px rgba(56,189,248,.72), 0 0 22px rgba(56,189,248,.48), 0 0 32px rgba(56,189,248,.22); }
+            to   { text-shadow: 0 0 1px #7dd3fc, 0 0 4px rgba(56,189,248,1), 0 0 12px rgba(56,189,248,.9), 0 0 26px rgba(56,189,248,.68), 0 0 40px rgba(56,189,248,.36); }
+        }
+        .chat-attachment-image { cursor: zoom-in; width: min(100%, 440px); max-height: 360px; object-fit: contain; background: rgba(2,6,23,.8); transition: transform .18s ease, border-color .18s ease; }
+        .chat-attachment-image:focus-visible { outline: 3px solid #a78bfa; outline-offset: 3px; }
+        #imageLightbox { cursor: zoom-out; }
+        #imageLightbox img { cursor: default; }
+        #cameraCaptureModal > div { width: min(96vw, 760px); max-height: 94vh; overflow: auto; }
+        .chat-attachment-image:hover { border-color: #a78bfa; }
+        #imageLightbox, #cameraCaptureModal { position: fixed; inset: 0; z-index: 100; background: rgba(2,6,23,.94); backdrop-filter: blur(12px); padding: 18px; display: flex; align-items: center; justify-content: center; }
+        /* The ID selector above is more specific than Tailwind's .hidden, so explicitly honor hidden modals. */
+        #imageLightbox.hidden, #cameraCaptureModal.hidden { display: none !important; }
+        #imageLightbox img { max-width: min(96vw, 1200px); max-height: 88vh; object-fit: contain; border-radius: 14px; box-shadow: 0 20px 80px #000; }
+        #cameraCaptureModal video { width: min(92vw, 720px); max-height: 66vh; background: #000; object-fit: contain; border-radius: 14px; }
+        .chat-media-action { min-height: 40px; padding: 9px 13px; border-radius: 10px; font-size: 12px; font-weight: 800; border: 1px solid rgba(139,157,255,.38); background: rgba(99,102,241,.12); color: #e0e7ff; }
+        .chat-media-action:hover { background: rgba(99,102,241,.25); }
+        @media (prefers-reduced-motion: reduce) { #symbolCanvas { opacity: .3 !important; } }
+
+        #dashboardScreen { width: min(1440px, calc(100% - 24px)); max-width: 1440px; margin-inline: auto; padding-bottom: 28px; }
+        .glass-panel, .glass-panel-red, .glass-panel-purple {
+            background: rgba(15, 21, 39, .79) !important;
+            border: 1px solid rgba(151, 165, 210, .18) !important;
+            border-radius: 18px !important;
+            box-shadow: 0 14px 42px rgba(0,0,0,.24) !important;
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+        }
+        .glass-panel-purple { background: rgba(22, 25, 49, .84) !important; }
+        .glass-panel-red { background: rgba(42, 24, 43, .84) !important; }
+        .owner-message-card { animation: none !important; box-shadow: 0 8px 24px rgba(248,113,181,.12) !important; }
+        .owner-glow-text, .admin-glow-text, .user-glow-text { text-shadow: none !important; }
+        .glow-cyan, .glow-red, .glow-purple { text-shadow: none !important; }
+        .font-orbitron { letter-spacing: .025em; }
+        .btn-cyber, .btn-cyber-red, .btn-cyber-purple {
+            border-radius: 11px !important;
+            box-shadow: none !important;
+            transition: transform .16s ease, background .16s ease, border-color .16s ease !important;
+        }
+        .btn-cyber { background: #6d7cf5 !important; color: #fff !important; border: 1px solid #8792ff !important; }
+        .btn-cyber:hover { background: #7f8bff !important; color: #fff !important; transform: translateY(-1px); }
+        .btn-cyber-purple { background: #7658d8 !important; color: #fff !important; border: 1px solid rgba(190,175,255,.45) !important; }
+        .btn-cyber-purple:hover { background: #876ce5 !important; color: #fff !important; transform: translateY(-1px); }
+        .btn-cyber-red { background: rgba(225, 72, 112, .16) !important; border: 1px solid rgba(248,113,181,.4) !important; }
+        .tab-btn { border-radius: 10px !important; color: #aab4d0 !important; transition: background .16s ease, color .16s ease; }
+        .tab-btn:hover { background: rgba(139,157,255,.12) !important; color: #fff !important; }
+        .tab-btn.active { background: rgba(139,157,255,.2) !important; color: #dfe3ff !important; box-shadow: inset 0 0 0 1px rgba(139,157,255,.22); }
+        .field, input.field, select.field, textarea.field {
+            background: rgba(7, 12, 27, .78) !important;
+            color: #edf0ff !important;
+            border: 1px solid rgba(151,165,210,.25) !important;
+            border-radius: 10px !important;
+            outline: none;
+        }
+        .field:focus, input:focus, textarea:focus, select:focus { border-color: #8792ff !important; box-shadow: 0 0 0 3px rgba(139,157,255,.12) !important; }
+        button { -webkit-tap-highlight-color: transparent; }
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 2px; }
+        button:disabled { cursor: not-allowed !important; filter: saturate(.55); }
+        #voiceRoomPanel {
+            background: linear-gradient(145deg, rgba(22,32,52,.98), rgba(20,23,43,.98)) !important;
+            border: 1px solid rgba(139,157,255,.26) !important;
+            border-radius: 16px !important;
+            box-shadow: inset 0 1px rgba(255,255,255,.025), 0 12px 28px rgba(0,0,0,.18);
+        }
+        #voiceRoomPanel h3 { color: #c4b5fd !important; }
+        #voiceRoomStatus { padding: 6px 10px; border-radius: 999px; background: rgba(139,157,255,.1); border: 1px solid rgba(139,157,255,.16); }
+        #voiceMemberList > div { background: rgba(9,14,29,.72) !important; border: 1px solid rgba(151,165,210,.12); border-radius: 10px !important; }
+        #voiceJoinBtn { background: #6256c9 !important; border-color: #8b83ec !important; color: white !important; }
+        #voiceJoinBtn:hover { background: #7468db !important; }
+        #voiceLeaveBtn { background: rgba(225,72,112,.14) !important; }
+        #chatTabBox { background: rgba(8,12,26,.76) !important; border-color: rgba(151,165,210,.16) !important; border-radius: 14px !important; }
+        #chatTabForm, #globalChatForm { gap: 10px; }
+        .task-row { border: 1px solid rgba(151,165,210,.13); background: rgba(11,16,32,.55); border-radius: 10px; padding: 10px 12px; }
+        .task-row.done { opacity: .62; }
+        #dashboardScreen .bg-black\/80, #dashboardScreen .bg-black\/90, #dashboardScreen .bg-black\/95 { background-color: rgba(8,12,26,.68) !important; }
+        #dashboardScreen .border-cyan-500\/40, #dashboardScreen .border-purple-500\/40 { border-color: rgba(151,165,210,.2) !important; }
+        #dashboardScreen .shadow-\[0_0_20px_rgba\(0\,255\,245\,0\.15\)\] { box-shadow: 0 8px 24px rgba(0,0,0,.16) !important; }
+        #customModal > div { border-radius: 18px !important; }
+        .tab-content { animation: cccFadeIn .18s ease-out; }
+        @keyframes cccFadeIn { from { opacity: .5; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 700px) {
+            #dashboardScreen { width: calc(100% - 14px); }
+            #dashboardScreen > div:first-child { border-radius: 14px !important; }
+            .glass-panel, .glass-panel-purple, .glass-panel-red { border-radius: 14px !important; }
+            #voiceRoomPanel { padding: 12px !important; }
+            #voiceRoomPanel > div:nth-of-type(2) { align-items: stretch; }
+            #voiceRoomPanel button, #voiceRoomPanel select { min-height: 42px; }
+            #chatTabBox { height: 54vh !important; min-height: 300px !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-cyan-400 selection:text-black">
+
+    <canvas id="symbolCanvas"></canvas>
+
+    <div class="relative z-10 flex-grow flex flex-col items-center justify-center p-4 md:p-8">
+
+        <!-- AUTH SHELL -->
+        <section id="authShell" class="w-full max-w-md">
+            <div class="glass rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute -top-16 -left-12 w-40 h-40 rounded-full bg-cyan-500/15 blur-3xl"></div>
+                <div class="relative text-center mb-7">
+                    <div class="w-16 h-16 mx-auto rounded-2xl border border-cyan-400/60 bg-cyan-400/10 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(0,255,245,0.4)]">🛡️</div>
+                    <h1 class="font-orbitron text-2xl md:text-3xl font-black tracking-widest text-cyan-400 glow-cyan mt-4">CYBER COMMAND</h1>
+                    <p class="font-mono text-[11px] tracking-[.25em] text-slate-400 mt-2">SECURE ACCESS TERMINAL // V34.0</p>
+                </div>
+
+                <!-- LOGIN VIEW -->
+                <div id="loginView">
+                    <h2 class="font-orbitron text-sm text-slate-200 tracking-widest mb-4">AUTHORIZE ACCESS</h2>
+                    <form id="loginForm" class="space-y-4">
+                        <label class="block text-xs text-slate-400 tracking-widest">EMAIL ADDRESS
+                            <input id="loginEmail" class="field mt-1" type="email" autocomplete="email" required placeholder="you@example.com">
+                        </label>
+                        <label class="block text-xs text-slate-400 tracking-widest relative">PASSWORD
+                            <div class="relative mt-1">
+                                <input id="loginPassword" class="field pr-10" type="password" autocomplete="current-password" required placeholder="Enter password">
+                                <button type="button" onclick="togglePasswordVisibility('loginPassword', 'eyeIconLogin')" class="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-400 hover:text-white transition">
+                                    <span id="eyeIconLogin">👁️</span>
+                                </button>
+                            </div>
+                        </label>
+                        <button id="loginBtn" class="btn-cyber rounded-lg w-full py-3 font-orbitron font-bold tracking-widest text-sm uppercase" type="submit">LOGIN TO SYSTEM</button>
+                    </form>
+                    <div class="flex justify-between gap-3 mt-5 text-xs">
+                        <button id="showRegister" type="button" class="text-cyan-400 hover:underline font-bold">Create account</button>
+                        <button id="showForgot" type="button" class="text-purple-400 hover:underline font-bold">Change Password</button>
+                    </div>
+                </div>
+
+                <!-- REGISTER VIEW WITH CAPTCHA -->
+                <div id="registerView" class="hidden">
+                    <h2 class="font-orbitron text-sm text-slate-200 tracking-widest mb-4">CREATE ACCOUNT</h2>
+                    <form id="registerForm" class="space-y-3">
+                        <label class="block text-xs text-slate-400 tracking-widest">FULL NAME
+                            <input id="registerName" class="field mt-1" required maxlength="80" autocomplete="name" placeholder="Your name">
+                        </label>
+                        <label class="block text-xs text-slate-400 tracking-widest">EMAIL ADDRESS
+                            <input id="registerEmail" class="field mt-1" type="email" required autocomplete="email" placeholder="you@example.com">
+                        </label>
+                        <label class="block text-xs text-slate-400 tracking-widest relative">PASSWORD (MINIMUM 6 CHARACTERS)
+                            <div class="relative mt-1">
+                                <input id="registerPassword" class="field pr-10" type="password" required minlength="6" autocomplete="new-password" placeholder="Create a strong password">
+                                <button type="button" onclick="togglePasswordVisibility('registerPassword', 'eyeIconReg')" class="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-400 hover:text-white transition">
+                                    <span id="eyeIconReg">👁️</span>
+                                </button>
+                            </div>
+                        </label>
+                        
+                        <div>
+                            <label class="block text-xs font-orbitron tracking-wider text-slate-300 mb-1">CAPTCHA VERIFICATION</label>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div id="captchaDisplay" class="captcha-box flex-grow py-2 px-4 rounded-lg border border-cyan-400/40 text-cyan-400 font-mono font-bold text-lg text-center italic"></div>
+                                <button type="button" id="refreshCaptchaBtn" class="p-2.5 rounded-lg border border-slate-700 bg-black/70 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">↻</button>
+                            </div>
+                            <input type="text" id="captchaInput" placeholder="Enter captcha code" required class="field text-sm uppercase">
+                        </div>
+
+                        <button id="registerSubmit" class="btn-cyber rounded-lg w-full py-3 font-orbitron font-bold tracking-widest text-xs uppercase mt-2" type="submit">REGISTER ACCOUNT</button>
+                    </form>
+                    <button id="showLoginFromReg" type="button" class="mt-4 text-xs text-cyan-400 hover:underline font-bold">← Back to login</button>
+                </div>
+
+                <!-- CHANGE PASSWORD VIEW -->
+                <div id="forgotView" class="hidden">
+                    <h2 class="font-orbitron text-sm text-purple-300 tracking-widest mb-4">CHANGE PASSWORD SECURITY</h2>
+                    <form id="forgotForm" class="space-y-3">
+                        <label class="block text-xs text-slate-400 tracking-widest">EMAIL ADDRESS
+                            <input id="forgotEmail" class="field mt-1" type="email" required autocomplete="email" placeholder="you@example.com">
+                        </label>
+                        <label class="block text-xs text-slate-400 tracking-widest relative">CURRENT / OLD PASSWORD
+                            <div class="relative mt-1">
+                                <input id="forgotOldPassword" class="field pr-10" type="password" required placeholder="Enter old password">
+                                <button type="button" onclick="togglePasswordVisibility('forgotOldPassword', 'eyeIconOldPass')" class="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-400 hover:text-white transition">
+                                    <span id="eyeIconOldPass">👁️</span>
+                                </button>
+                            </div>
+                        </label>
+                        <label class="block text-xs text-slate-400 tracking-widest relative">NEW PASSWORD (MIN 6 CHARACTERS)
+                            <div class="relative mt-1">
+                                <input id="forgotNewPassword" class="field pr-10" type="password" required minlength="6" placeholder="Enter new password">
+                                <button type="button" onclick="togglePasswordVisibility('forgotNewPassword', 'eyeIconNewPass')" class="absolute right-3 top-1/2 -translate-y-1/2 text-cyan-400 hover:text-white transition">
+                                    <span id="eyeIconNewPass">👁️</span>
+                                </button>
+                            </div>
+                        </label>
+                        <button id="forgotSubmit" class="btn-cyber-purple rounded-lg w-full py-3 font-orbitron font-bold tracking-widest text-xs uppercase mt-2" type="submit">UPDATE PASSWORD</button>
+                    </form>
+                    <button id="showLoginFromForgot" type="button" class="mt-4 text-xs text-cyan-400 hover:underline font-bold">← Back to login</button>
+                </div>
+
+                <div id="message" role="status" aria-live="polite" class="hidden mt-4 rounded-lg border border-slate-700 bg-black/50 p-3 text-sm"></div>
+                <p class="text-[10px] text-slate-500 font-mono text-center mt-6">AUTHENTICATION BY FIREBASE // CLOUD SYNCED</p>
+            </div>
+        </section>
+
+        <!-- WELCOME FLASH -->
+        <div id="welcomeMsg" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md pointer-events-none">
+            <div id="welcomeText" class="font-orbitron text-4xl md:text-6xl font-black text-center animate-flash"></div>
+        </div>
+
+        <!-- MODAL -->
+        <div id="customModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+            <div class="glass-panel rounded-xl p-6 max-w-sm w-full text-center space-y-4 border border-cyan-400/60">
+                <div class="text-cyan-400 font-orbitron font-bold text-sm uppercase">SYSTEM MESSAGE</div>
+                <div id="modalText" class="text-slate-200 text-sm font-mono whitespace-pre-line"></div>
+                <div id="modalBtnContainer" class="flex flex-col gap-2">
+                    <button onclick="closeCustomModal()" class="btn-cyber w-full py-2 rounded-lg font-orbitron text-xs font-bold uppercase">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="imageLightbox" class="hidden" role="dialog" aria-modal="true" aria-label="Photo preview">
+            <button id="closeImageLightbox" type="button" class="absolute top-4 right-4 rounded-full bg-white/10 px-4 py-2 text-white font-bold">✕ CLOSE</button>
+            <img id="lightboxImage" alt="Expanded chat photo">
+        </div>
+        <div id="cameraCaptureModal" class="hidden" role="dialog" aria-modal="true" aria-label="Take a photo">
+            <div class="w-full max-w-3xl rounded-2xl border border-indigo-400/40 bg-slate-950 p-4 md:p-6 text-center space-y-4">
+                <h2 class="font-orbitron text-lg font-bold text-indigo-200">📷 TAKE A PHOTO</h2>
+                <video id="liveCameraPreview" autoplay playsinline muted></video>
+                <canvas id="cameraCaptureCanvas" class="hidden"></canvas>
+                <p id="cameraPermissionHint" class="text-xs text-slate-400">Your browser may ask for camera permission the first time. You can manage this site's permission in browser settings.</p>
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button id="capturePhotoBtn" type="button" class="chat-media-action">📸 CAPTURE & SEND</button>
+                    <button id="closeCameraBtn" type="button" class="chat-media-action">CANCEL</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboardScreen" class="hidden w-full max-w-6xl flex flex-col space-y-4">
+            
+            <!-- QUICK CYBER CONTROLS TOOLBAR -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-black/80 p-3 rounded-xl border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,245,0.15)]">
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-widest">MATRIX RAIN COLOR:</span>
+                    <button onclick="changeMatrixColor('#00fff5')" class="w-5 h-5 rounded-full bg-[#00fff5] border border-white/50 shadow-[0_0_8px_#00fff5] hover:scale-110 transition" title="Cyan"></button>
+                    <button onclick="changeMatrixColor('#00ff66')" class="w-5 h-5 rounded-full bg-[#00ff66] border border-white/50 shadow-[0_0_8px_#00ff66] hover:scale-110 transition" title="Green"></button>
+                    <button onclick="changeMatrixColor('#ff2a5f')" class="w-5 h-5 rounded-full bg-[#ff2a5f] border border-white/50 shadow-[0_0_8px_#ff2a5f] hover:scale-110 transition" title="Red"></button>
+                    <button onclick="changeMatrixColor('#b026ff')" class="w-5 h-5 rounded-full bg-[#b026ff] border border-white/50 shadow-[0_0_8px_#b026ff] hover:scale-110 transition" title="Purple"></button>
+                    <button onclick="changeMatrixColor('#facc15')" class="w-5 h-5 rounded-full bg-[#facc15] border border-white/50 shadow-[0_0_8px_#facc15] hover:scale-110 transition" title="Yellow"></button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleAudio()" id="soundToggleBtn" class="px-3 py-1.5 rounded-lg bg-black/90 border border-slate-700 text-xs font-mono text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition flex items-center gap-1">
+                        <span>SOUND SFX: OFF</span> 🔇
+                    </button>
+                    <button onclick="toggleDroneSound()" id="droneToggleBtn" class="px-3 py-1.5 rounded-lg bg-black/90 border border-purple-800 text-xs font-mono text-purple-300 hover:text-purple-400 hover:border-purple-400 transition flex items-center gap-1">
+                        <span>AMBIENT SYNTH: OFF</span> 🎛️
+                    </button>
+                    <button onclick="triggerPanicMode()" id="panicBtn" class="px-4 py-1.5 rounded-lg bg-red-600/30 border border-red-500 text-xs font-mono font-bold text-red-400 hover:bg-red-600 hover:text-white transition animate-pulse shadow-[0_0_15px_rgba(255,42,95,0.4)] flex items-center gap-1">
+                        ⚠️ LOCKDOWN / PANIC
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-3 h-8 bg-cyan-400 rounded-sm shadow-[0_0_12px_#00fff5]"></div>
+                    <div>
+                        <h2 class="font-orbitron text-xl font-bold text-white tracking-wider">CYBER CORE DASHBOARD</h2>
+                        <div class="flex items-center gap-2 mt-0.5">
+                            <span id="userNameBadge" class="text-xs font-mono text-slate-300 font-bold">USER: -</span>
+                            <span id="userRoleBadge" class="inline-block text-xs font-mono px-2.5 py-0.5 rounded bg-cyan-400/15 border border-cyan-400/50 text-cyan-400">ROLE: UNKNOWN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABS NAVIGATION -->
+                <div class="flex flex-wrap items-center space-x-1 md:space-x-2 bg-black/50 p-1.5 rounded-xl border border-slate-800">
+                    <button class="tab-btn active px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="1" onclick="switchTab(1)">MAIN</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="2" onclick="switchTab(2)">DIAGNOSTICS</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="6" onclick="switchTab(6)">DEFENSE SIM</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="7" onclick="switchTab(7)">AI SCANNER</button>
+                    <button id="logsTabBtn" class="tab-btn hidden px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="3" onclick="switchTab(3)">LOGS</button>
+                    <button id="terminalTabBtn" class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="4" onclick="switchTab(4)">TERMINAL</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="8" onclick="switchTab(8)">CHAT</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="9" onclick="switchTab(9)">WORKSPACE</button>
+                    <button class="tab-btn px-3 py-1.5 rounded-lg font-orbitron text-xs font-semibold" data-tab="5" onclick="switchTab(5)">DEVELOPER</button>
+                </div>
+
+                <button id="logoutBtn" class="px-5 py-2 rounded-lg border border-red-500/60 bg-red-500/15 hover:bg-red-500 hover:text-white text-red-400 font-orbitron text-xs font-bold transition">LOGOUT</button>
+            </div>
+
+            <div class="w-full min-h-[500px]">
+                
+                <!-- TAB 1: MAIN -->
+                <div id="tab1" class="tab-content flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-10 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="space-y-4 max-w-xl">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/40 text-cyan-400 text-xs font-mono">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                SYSTEM ONLINE • CLOUD SYNC ACTIVE
+                            </div>
+                            <h1 class="font-orbitron text-3xl md:text-5xl font-black text-white">WELCOME TO <span class="text-cyan-400 glow-cyan">CYBER CORE</span></h1>
+                            <p class="text-slate-300 text-sm md:text-base">Authenticated Command Center v34.0. Real-time Threat Intelligence and Quantum Defense Matrix Active.</p>
+                            <div class="flex gap-3">
+                                <button onclick="switchTab(6)" class="btn-cyber px-6 py-3 rounded-lg font-orbitron text-xs font-bold uppercase">Launch Defense Sim 🛡️</button>
+                                <button onclick="switchTab(7)" class="btn-cyber-purple px-6 py-3 rounded-lg font-orbitron text-xs font-bold uppercase">AI Code Scanner 🧠</button>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex flex-col items-center justify-center p-6 rounded-2xl bg-black/50 border border-cyan-400/40 shadow-[0_0_35px_rgba(0,255,245,0.2)]">
+                            <div class="w-28 h-28 rounded-2xl bg-gradient-to-tr from-cyan-400 via-purple-500 to-red-500 p-1.5 flex items-center justify-center animate-pulse">
+                                <div class="w-full h-full bg-black rounded-xl flex items-center justify-center text-5xl">⚡</div>
+                            </div>
+                            <span class="font-orbitron text-xs text-cyan-400 mt-3 tracking-widest uppercase">SECURE NODE v34.0</span>
+                        </div>
+                    </div>
+
+                    <!-- OWNER & ADMIN SUPREME PANEL -->
+                    <div id="ownerAdminPanel" class="hidden glass-panel-red rounded-2xl p-6 md:p-8 space-y-6">
+                        <h3 class="font-orbitron text-lg font-bold text-red-500 glow-red">ADMIN & OWNER SUPREME CONTROL PANEL</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div>
+                                <label class="block text-xs font-orbitron text-slate-300 mb-1">TARGET USER ID OR NAME</label>
+                                <input type="text" id="promoteTargetId" placeholder="e.g. UL-1234 or Name" class="field text-sm">
+                            </div>
+                            <div id="ownerOnlyButtons" class="contents">
+                                <div class="flex items-end">
+                                    <button id="makeAdminBtn" class="w-full btn-cyber-red font-orbitron py-2.5 rounded-lg font-bold text-xs uppercase">Make Admin</button>
+                                </div>
+                                <div class="flex items-end">
+                                    <button id="removeAdminBtn" class="w-full border border-yellow-500 bg-yellow-500/20 hover:bg-yellow-500 text-white font-orbitron py-2.5 rounded-lg font-bold text-xs uppercase transition">Demote</button>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button id="banUserBtn" class="w-full bg-red-600/30 border border-red-600 hover:bg-red-600 text-white font-orbitron py-2.5 rounded-lg font-bold text-xs uppercase transition">Ban User</button>
+                            </div>
+                            <div class="flex items-end">
+                                <button id="unbanUserBtn" class="w-full border border-green-500 bg-green-500/20 hover:bg-green-500 text-white font-orbitron py-2.5 rounded-lg font-bold text-xs uppercase transition">Unban User</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REAL-TIME GLOBAL CHAT BOX PANEL -->
+                    <div id="assignRolePanel" class="glass-panel-purple rounded-2xl p-6 md:p-8 space-y-4">
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-purple-500/30 pb-3 gap-2">
+                            <h3 class="font-orbitron text-lg font-bold text-purple-400 glow-purple">💬 SECURE GLOBAL COMMAND CHAT</h3>
+                            
+                            <div class="flex items-center gap-3">
+                                <button id="adminClearChatBtn" class="hidden px-3 py-1.5 rounded-lg bg-red-600/20 border border-red-500/60 text-xs font-mono font-bold text-red-300 hover:bg-red-600 hover:text-white transition shadow-[0_0_10px_rgba(255,42,95,0.3)]">
+                                    🗑️ CLEAR CHAT
+                                </button>
+                                <span class="text-xs font-mono text-cyan-400 animate-pulse">● ENCRYPTED & LIVE</span>
+                            </div>
+                        </div>
+                        <p class="text-xs font-mono text-slate-300">Global communication channel.</p>
+                        
+                        <div id="globalChatBox" role="log" aria-live="polite" aria-relevant="additions text" class="bg-black/90 p-4 rounded-xl border border-purple-500/30 h-96 md:h-[32rem] min-h-[22rem] overflow-y-auto overscroll-contain font-mono text-sm space-y-2 flex flex-col">
+                            <div class="text-slate-500 italic text-center">[Connecting to secure chat channel...]</div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 pt-2 items-center">
+                            <button type="button" data-camera-form="globalChatForm" class="chat-open-camera chat-media-action">📷 OPEN CAMERA</button>
+                            <button type="button" data-gallery-for="globalChatForm" class="chat-gallery-btn chat-media-action">🖼️ PHOTO / GALLERY</button>
+                            <button type="button" data-voice-for="globalChatForm" class="chat-voice-btn px-3 py-2 rounded-lg border border-red-500/60 bg-red-500/10 text-red-200 text-xs font-bold">🎙️ RECORD VOICE</button>
+                            <input id="globalChatGalleryInput" type="file" accept="image/*" class="hidden chat-gallery-input">
+                            <span class="text-[11px] text-slate-400">Click any sent photo to view it larger.</span>
+                        </div>
+                        <form id="globalChatForm" class="flex flex-col sm:flex-row gap-2 pt-2">
+                            <input type="text" id="chatMessageInput" placeholder="Type a secure message..." autocomplete="off" class="field text-sm font-mono flex-grow min-w-0" maxlength="1000" aria-label="Chat message">
+                            <button type="submit" class="btn-cyber-purple px-6 py-2.5 rounded-lg font-orbitron text-xs font-bold uppercase transition sm:self-stretch">SEND ➔</button>
+                        </form>
+                    </div>
+
+                    <!-- DIRECTORY TABLE -->
+                    <div id="managementPanel" class="hidden glass-panel rounded-2xl p-6 md:p-8 space-y-4">
+                        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 border-b border-slate-800 pb-4">
+                            <h3 class="font-orbitron text-lg font-bold text-cyan-400">SYSTEM ACCOUNTS DIRECTORY</h3>
+                            
+                            <div id="ownerPasswordLookupContainer" class="hidden flex flex-wrap items-center gap-2 bg-black/80 p-3 rounded-xl border border-red-500/60 shadow-[0_0_15px_rgba(255,42,95,0.2)]">
+                                <span class="text-[11px] font-orbitron text-red-400 font-bold uppercase">🔑 PASSWORD MANEGER :</span>
+                                <input type="text" id="ownerTargetPassId" placeholder="UL-ID or Name" class="field py-1 px-3 text-xs w-36">
+                                <input type="text" id="ownerNewPassInput" placeholder="New Password" class="field py-1 px-3 text-xs w-32">
+                                <button id="ownerGetPassBtn" class="btn-cyber-red px-3 py-1.5 rounded font-orbitron text-[11px] font-bold uppercase transition">
+                                    VIEW
+                                </button>
+                                <button id="ownerResetPassBtn" class="bg-yellow-500/20 border border-yellow-500 text-yellow-300 hover:bg-yellow-500 hover:text-black px-3 py-1.5 rounded font-orbitron text-[11px] font-bold uppercase transition">
+                                    RESET
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto pt-2">
+                            <table class="w-full text-left border-collapse font-mono text-xs">
+                                <thead>
+                                    <tr class="border-b border-slate-800 text-slate-400">
+                                        <th class="py-3 px-4">USER ID</th>
+                                        <th class="py-3 px-4">NAME</th>
+                                        <th class="py-3 px-4">ROLE</th>
+                                        <th class="py-3 px-4">DESIGNATIONS</th>
+                                        <th class="py-3 px-4 text-right">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: SYSTEM DIAGNOSTICS & HARDWARE METRICS -->
+                <div id="tab2" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-8 space-y-6">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="font-orbitron text-lg font-bold text-cyan-400">📊 SYSTEM DIAGNOSTICS & HARDWARE THERMAL MONITOR</h3>
+                            <span class="text-xs font-mono text-green-400 font-bold animate-pulse">● HARDWARE TELEMETRY LIVE</span>
+                        </div>
+
+                        <div class="bg-black/90 p-5 rounded-xl border border-cyan-500/40 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-orbitron text-xs font-bold text-cyan-400">MULTI-CORE CPU THERMAL METRICS</span>
+                                <span class="font-mono text-[10px] text-slate-400">CPU ARCHITECTURE: QUANTUM-X 128-BIT</span>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center space-y-2">
+                                    <span class="font-mono text-[11px] text-slate-400">CORE 01</span>
+                                    <div id="core1Temp" class="font-orbitron text-2xl font-bold text-cyan-400">42°C</div>
+                                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="core1Bar" class="bg-cyan-400 h-full w-[42%] transition-all"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center space-y-2">
+                                    <span class="font-mono text-[11px] text-slate-400">CORE 02</span>
+                                    <div id="core2Temp" class="font-orbitron text-2xl font-bold text-cyan-400">45°C</div>
+                                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="core2Bar" class="bg-cyan-400 h-full w-[45%] transition-all"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center space-y-2">
+                                    <span class="font-mono text-[11px] text-slate-400">CORE 03</span>
+                                    <div id="core3Temp" class="font-orbitron text-2xl font-bold text-yellow-400">51°C</div>
+                                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="core3Bar" class="bg-yellow-400 h-full w-[51%] transition-all"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center space-y-2">
+                                    <span class="font-mono text-[11px] text-slate-400">CORE 04</span>
+                                    <div id="core4Temp" class="font-orbitron text-2xl font-bold text-cyan-400">39°C</div>
+                                    <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                        <div id="core4Bar" class="bg-cyan-400 h-full w-[39%] transition-all"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/90 p-5 rounded-xl border border-cyan-500/40 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="font-orbitron text-xs font-bold text-cyan-400 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                    GLOBAL DEFENSE SATELLITE RADAR
+                                </span>
+                                <span class="font-mono text-[10px] text-slate-400">STATUS: SCANNING LATITUDE: 28.6139° N, LONGITUDE: 77.2090° E</span>
+                            </div>
+                            <div class="relative w-full h-48 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
+                                <div class="absolute inset-0 bg-[radial-gradient(#00fff5_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
+                                <div class="absolute w-40 h-40 rounded-full border border-cyan-500/30"></div>
+                                <div class="absolute w-28 h-28 rounded-full border border-cyan-500/50"></div>
+                                <div class="absolute w-16 h-16 rounded-full border border-cyan-400"></div>
+                                <div class="absolute w-40 h-40 rounded-full overflow-hidden radar-sweep pointer-events-none">
+                                    <div class="w-1/2 h-1/2 bg-gradient-to-tr from-transparent to-cyan-400/60 origin-bottom-right"></div>
+                                </div>
+                                <div class="absolute top-10 left-24 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping shadow-[0_0_10px_#ff2a5f]" title="Threat Point Alpha"></div>
+                                <div class="absolute bottom-12 right-28 w-2 h-2 bg-yellow-400 rounded-full animate-pulse shadow-[0_0_10px_#facc15]" title="Target Point Beta"></div>
+                                <div class="absolute top-14 right-1/3 w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_10px_#00fff5]" title="Core Node"></div>
+                                <span class="absolute bottom-2 left-3 font-mono text-[10px] text-cyan-400 bg-black/80 px-2 py-0.5 rounded border border-cyan-500/30">NODE TELEMETRY: SECURE & STABLE</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                            <div class="bg-black/80 p-4 rounded-xl border border-slate-800 space-y-3">
+                                <div class="flex justify-between text-xs font-mono">
+                                    <span class="text-slate-300 font-bold">TOTAL CPU LOAD FREQUENCY</span>
+                                    <span id="cpuUsageVal" class="text-cyan-400 font-bold">34%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2">
+                                    <div id="cpuBar" class="bg-cyan-400 h-2 rounded-full transition-all duration-500" style="width: 34%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between text-xs font-mono pt-2">
+                                    <span class="text-slate-300 font-bold">MEMORY ALLOCATION</span>
+                                    <span id="ramUsageVal" class="text-purple-400 font-bold">58%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2">
+                                    <div id="ramBar" class="bg-purple-500 h-2 rounded-full transition-all duration-500" style="width: 58%"></div>
+                                </div>
+
+                                <div class="flex justify-between text-xs font-mono pt-2">
+                                    <span class="text-slate-300 font-bold">GPU LOAD & VRAM</span>
+                                    <span id="gpuUsageVal" class="text-red-400 font-bold">29%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-2">
+                                    <div id="gpuBar" class="bg-red-500 h-2 rounded-full transition-all duration-500" style="width: 29%"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-black/80 p-4 rounded-xl border border-slate-800 flex flex-col justify-between space-y-2 font-mono text-xs">
+                                <div class="flex justify-between border-b border-slate-800 pb-1">
+                                    <span class="text-slate-400">NETWORK THROUGHPUT:</span>
+                                    <span id="netSpeedVal" class="text-green-400 font-bold">1.24 GB/s</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-800 pb-1">
+                                    <span class="text-slate-400">SERVER LATENCY:</span>
+                                    <span class="text-green-400 font-bold">14ms (Optimal)</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-800 pb-1">
+                                    <span class="text-slate-400">DATABASE HEALTH:</span>
+                                    <span class="text-cyan-400 font-bold">100% Operational</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">ACTIVE SESSION ID:</span>
+                                    <span id="activeSessionId" class="text-cyan-400 font-bold tracking-wider">UL-XXXXXX</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/90 p-5 rounded-xl border border-red-500/30 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="font-orbitron text-xs font-bold text-red-400 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                                    WORLD SECURITY THREAT FEED
+                                </span>
+                                <span class="font-mono text-[10px] text-slate-400">AUTOMATED IP BLOCKING ACTIVE</span>
+                            </div>
+                            <div id="threatFeedBox" class="bg-black p-3 rounded-lg font-mono text-xs text-red-300/90 h-24 overflow-y-auto space-y-1 border border-slate-900">
+                                <div>[10:42:01] 🚫 BLOCKED UNAUTHORIZED PING FROM IP 185.220.101.5 (TOKYO NODE)</div>
+                                <div>[10:42:15] 🛡️ SYN-FLOOD PREVENTED ON PORT 443 FROM IP 198.51.100.42</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- TAB 6: HACKER DEFENSE SIMULATOR -->
+                <div id="tab6" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-8 space-y-6">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <div>
+                                <h3 class="font-orbitron text-lg font-bold text-red-500 glow-red">⚔️ REAL-TIME HACKER DEFENSE SIMULATOR</h3>
+                                <p class="text-xs font-mono text-slate-400">Mitigate incoming live cyber attacks in real-time to maintain system shield rating.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-mono text-slate-400 block">DEFENSE SHIELD RATING</span>
+                                <span id="shieldRatingVal" class="font-orbitron text-2xl font-bold text-cyan-400">100%</span>
+                            </div>
+                        </div>
+
+                        <div id="simAttackCard" class="bg-black/90 p-5 rounded-xl border border-cyan-500/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-green-500/20 border border-green-500/50 text-green-400 text-xs font-mono">
+                                    <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
+                                    <span id="simAttackStatus">SYSTEM SECURE — MONITORING SECTOR</span>
+                                </div>
+                                <h4 id="simAttackTitle" class="font-orbitron text-xl font-bold text-white">NO ACTIVE THREATS</h4>
+                                <p id="simAttackDesc" class="font-mono text-xs text-slate-400">Perimeter scan in progress. Click "TRIGGER THREAT EVENT" to test defense response.</p>
+                            </div>
+                            <button onclick="triggerSimulatedAttack()" class="btn-cyber-red px-5 py-2.5 rounded-lg font-orbitron text-xs font-bold uppercase whitespace-nowrap">
+                                💥 TRIGGER THREAT EVENT
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button onclick="mitigateThreat('shield')" class="btn-cyber p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                                <span class="text-2xl">🛡️</span>
+                                <span class="font-orbitron text-xs font-bold uppercase">DEPLOY AI SHIELD</span>
+                                <span class="font-mono text-[10px] opacity-80">Counters DDoS Attacks</span>
+                            </button>
+                            <button onclick="mitigateThreat('purge')" class="btn-cyber-purple p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                                <span class="text-2xl">☣️</span>
+                                <span class="font-orbitron text-xs font-bold uppercase">PURGE BUFFER</span>
+                                <span class="font-mono text-[10px] opacity-80">Counters Malware Injections</span>
+                            </button>
+                            <button onclick="mitigateThreat('reroute')" class="btn-cyber p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                                <span class="text-2xl">🔀</span>
+                                <span class="font-orbitron text-xs font-bold uppercase">REROUTE TRAFFIC</span>
+                                <span class="font-mono text-[10px] opacity-80">Counters Ransomware Attacks</span>
+                            </button>
+                            <button onclick="mitigateThreat('isolate')" class="btn-cyber-red p-4 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                                <span class="text-2xl">🔒</span>
+                                <span class="font-orbitron text-xs font-bold uppercase">ISOLATE SUBNET</span>
+                                <span class="font-mono text-[10px] opacity-80">Counters SQL Injection</span>
+                            </button>
+                        </div>
+
+                        <div class="bg-black/95 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <span class="font-orbitron text-xs font-bold text-slate-300">DEFENSE LOG TELEMETRY</span>
+                            <div id="simLogBox" class="h-32 overflow-y-auto font-mono text-xs text-cyan-300 space-y-1">
+                                <div>[SIMULATOR READY] — Countermeasure protocols online. Standing by for threat vectors.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 7: AI THREAT SCANNER -->
+                <div id="tab7" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-8 space-y-6">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <div>
+                                <h3 class="font-orbitron text-lg font-bold text-purple-400 glow-purple">🧠 AI THREAT INTELLIGENCE & CODE SCANNER</h3>
+                                <p class="text-xs font-mono text-slate-400">Paste code snippets or scripts to inspect for zero-day vulnerabilities & security flaws.</p>
+                            </div>
+                            <span class="text-xs font-mono text-purple-400 border border-purple-500/40 px-2 py-1 rounded bg-purple-500/10">AI ENGINE: QUANTUM-v3.4</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="block text-xs font-orbitron text-slate-300">SOURCE CODE INPUT FOR SCANNING</label>
+                            <textarea id="aiScanInput" rows="5" class="field text-xs font-mono" placeholder="// Paste source code, SQL queries, or configuration parameters here...
+function authenticateUser(user, pass) {
+    let query = 'SELECT * FROM users WHERE user = ' + user;
+    return db.execute(query);
+}"></textarea>
+                            <button onclick="runAiCodeScan()" id="aiScanBtn" class="btn-cyber-purple w-full py-3 rounded-lg font-orbitron text-xs font-bold uppercase tracking-wider">
+                                🔍 ANALYZE WITH AI ENGINE
+                            </button>
+                        </div>
+
+                        <div id="aiProgressContainer" class="hidden space-y-2">
+                            <div class="flex justify-between text-xs font-mono text-slate-300">
+                                <span>AI NEURAL INSPECTION IN PROGRESS...</span>
+                                <span id="aiProgressVal">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2">
+                                <div id="aiProgressBar" class="bg-purple-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div id="aiResultBox" class="hidden bg-black/90 p-5 rounded-xl border border-purple-500/40 space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                                <span class="font-orbitron text-xs font-bold text-purple-300">AI ANALYSIS REPORT</span>
+                                <span id="aiSecurityScore" class="font-orbitron text-sm font-bold text-red-400">SECURITY SCORE: 42/100 (HIGH RISK)</span>
+                            </div>
+                            <div id="aiReportDetails" class="font-mono text-xs text-slate-200 space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: LOGS -->
+                <div id="tab3" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-8">
+                        <h3 class="font-orbitron text-lg font-bold text-cyan-400 mb-4">[SECURED AUDIT LOGS]</h3>
+                        <div id="auditLogContainer" class="bg-black/95 p-4 rounded-xl font-mono text-xs text-green-400 h-96 overflow-y-auto space-y-2 border border-slate-800">
+                            <div>[SYSTEM BOOT] - Neural Core Initialized Successfully. Audit Logs Active.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: TERMINAL CONSOLE -->
+                <div id="tab4" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 md:p-8 space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <h3 class="font-orbitron text-lg font-bold text-cyan-400">ADVANCED CYBER TERMINAL v34.0</h3>
+                            <span class="text-xs font-mono text-slate-400">Type <strong class="text-yellow-400 font-bold">help</strong> for available commands</span>
+                        </div>
+                        <div class="bg-black/95 p-4 rounded-xl font-mono text-xs text-slate-200 h-96 overflow-y-auto border border-slate-800 flex flex-col justify-between">
+                            <div id="terminalOutput" class="space-y-1">
+                                <div class="text-cyan-400 font-bold">[CYBER KERNEL v34.0 SECURED CONSOLE]</div>
+                                <div class="text-slate-400">Type <span class="text-yellow-400 font-bold">help</span> to view available terminal commands.</div>
+                            </div>
+                            <div class="flex items-center gap-2 pt-4 border-t border-slate-800 mt-2">
+                                <span class="text-cyan-400 font-bold">&gt;</span>
+                                <input type="text" id="terminalInput" placeholder="Type command here (e.g. uptime, ip, help)..." class="w-full bg-transparent outline-none text-cyan-400 font-mono text-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 8: DEDICATED GLOBAL CHAT -->
+                <div id="tab8" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel-purple rounded-2xl p-4 md:p-8 space-y-4 border border-purple-500/40">
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-purple-500/30 pb-4 gap-3">
+                            <div>
+                                <h2 class="font-orbitron text-xl md:text-2xl font-bold text-purple-300 glow-purple">💬 SECURE GLOBAL CHAT</h2>
+                                <p class="text-sm text-slate-300 mt-2">MAIN tab ke saath same live chat sync.</p>
+                            </div>
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <span class="text-xs font-mono text-cyan-400">● ENCRYPTED & LIVE</span>
+                            </div>
+                        </div>
+                        <!-- DISCORD-STYLE LIVE VOICE ROOMS -->
+                        <section id="voiceRoomPanel" class="rounded-xl border border-emerald-500/40 bg-slate-950/80 p-4 space-y-3">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div>
+                                    <h3 class="font-orbitron font-bold text-emerald-300">🔊 LIVE VOICE CHANNELS</h3>
+                                    <p class="text-xs text-slate-400 mt-1">Discord-style live mic room • peer-to-peer audio</p>
+                                </div>
+                                <span id="voiceRoomStatus" class="text-xs text-slate-400">Not connected</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <label for="voiceRoomSelect" class="text-xs text-slate-300">Channel</label>
+                                <select id="voiceRoomSelect" class="field text-sm min-w-[140px]">
+                                    <option value="general"># General</option><option value="gaming"># Gaming</option><option value="study"># Study Room</option><option value="team"># Team Voice</option>
+                                </select>
+                                <button id="voiceJoinBtn" type="button" class="px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-400/60 text-emerald-200 text-xs font-bold">🎧 JOIN VOICE</button>
+                                <button id="voiceMuteBtn" type="button" disabled class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-600 text-slate-300 text-xs font-bold disabled:opacity-40">🎙️ MUTE</button>
+                                <button id="voiceDeafenBtn" type="button" disabled class="px-3 py-2 rounded-lg bg-slate-800 border border-slate-600 text-slate-300 text-xs font-bold disabled:opacity-40">🔈 DEAFEN</button>
+                                <button id="voiceLeaveBtn" type="button" disabled class="px-3 py-2 rounded-lg bg-red-500/15 border border-red-500/50 text-red-300 text-xs font-bold disabled:opacity-40">📴 LEAVE</button>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <div class="rounded-lg border border-slate-800 bg-black/50 p-3">
+                                    <div class="text-[11px] uppercase tracking-wider text-slate-400 mb-2">People in channel</div>
+                                    <div id="voiceMemberList" class="space-y-2 text-sm"><p class="text-slate-500">Join a channel to see its members.</p></div>
+                                </div>
+                                <div class="rounded-lg border border-slate-800 bg-black/50 p-3">
+                                    <div class="text-[11px] uppercase tracking-wider text-slate-400 mb-2">Voice tips</div>
+                                    <p class="text-xs text-slate-400 leading-relaxed">Allow microphone permission. Both users must be online at the same time. Use HTTPS or localhost. For larger rooms, TURN relay and production signaling rules are recommended.</p>
+                                    <div id="voiceRemoteAudio" class="hidden"></div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="flex justify-end items-center gap-3 pt-1">
+                            <span class="text-[11px] text-slate-500">Admin/Owner only</span>
+                            <button id="chatTabClearBtn" type="button" class="hidden px-4 py-2 rounded-lg bg-red-600/20 border border-red-500/60 text-xs font-mono font-bold text-red-300 hover:bg-red-600 hover:text-white transition shadow-[0_0_16px_rgba(239,68,68,.18)]">🗑️ CLEAR CHAT</button>
+                        </div>
+                        <div id="chatTabBox" role="log" aria-live="polite" aria-relevant="additions text" class="bg-black/90 p-4 md:p-6 rounded-xl border border-purple-500/30 h-[60vh] md:h-[68vh] min-h-[360px] overflow-y-auto overscroll-contain font-mono text-base space-y-2 flex flex-col">
+                            <div class="text-slate-500 italic text-center">[Connecting to secure chat channel...]</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2 items-center">
+                            <button type="button" data-camera-form="chatTabForm" class="chat-open-camera chat-media-action">📷 OPEN CAMERA</button>
+                            <button type="button" data-gallery-for="chatTabForm" class="chat-gallery-btn chat-media-action">🖼️ PHOTO / GALLERY</button>
+                            <button type="button" data-voice-for="chatTabForm" class="chat-voice-btn px-3 py-2 rounded-lg border border-red-500/60 bg-red-500/10 text-red-200 text-xs font-bold">🎙️ RECORD VOICE</button>
+                            <input id="chatTabGalleryInput" type="file" accept="image/*" class="hidden chat-gallery-input">
+                            <span class="text-[11px] text-slate-400">Voice/photo messages sync to both chat panels. Click a photo to enlarge.</span>
+                        </div>
+                        <form id="chatTabForm" class="flex flex-col sm:flex-row gap-3 pt-2">
+                            <input type="text" id="chatTabInput" placeholder="Type a secure message..." autocomplete="off" class="field text-base font-mono flex-grow min-w-0 py-3" maxlength="1000" aria-label="Chat message">
+                            <button type="submit" class="btn-cyber-purple px-8 py-3 rounded-lg font-orbitron text-sm font-bold uppercase transition sm:self-stretch">SEND ➔</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- TAB 9: DAILY WORKSPACE -->
+                <div id="tab9" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-5 md:p-8 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div><h2 class="font-orbitron text-xl md:text-2xl font-bold text-cyan-300">DAILY WORKSPACE</h2><p class="text-sm text-slate-300 mt-1">Personal tasks, quick notes, calculator and focus timer. Notes/tasks save in this browser.</p></div>
+                            <span id="workspaceDate" class="text-xs font-mono text-cyan-200"></span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <section class="rounded-xl border border-cyan-500/30 bg-black/40 p-4 space-y-3">
+                                <h3 class="font-orbitron text-cyan-300 font-bold">✅ DAILY TASKS</h3>
+                                <form id="taskAddForm" class="flex gap-2"><input id="taskInput" maxlength="160" class="field flex-1 min-w-0" placeholder="Add a task…" autocomplete="off"><button class="btn-cyber px-4 py-2 rounded-lg font-bold" type="submit">ADD</button></form>
+                                <div id="taskList" class="space-y-2 max-h-72 overflow-y-auto"></div>
+                                <div class="flex gap-2"><button id="clearDoneTasks" type="button" class="px-3 py-2 rounded-lg border border-slate-600 text-xs">CLEAR COMPLETED</button><button id="resetTasks" type="button" class="px-3 py-2 rounded-lg border border-red-500/50 text-red-200 text-xs">CLEAR ALL</button></div>
+                            </section>
+                            <section class="rounded-xl border border-purple-500/30 bg-black/40 p-4 space-y-3">
+                                <h3 class="font-orbitron text-purple-300 font-bold">📝 QUICK NOTES</h3>
+                                <textarea id="quickNotes" rows="8" maxlength="12000" class="field w-full resize-y" placeholder="Write reminders, ideas, commands, meeting notes…"></textarea>
+                                <div class="flex items-center justify-between gap-2"><span id="notesSavedStatus" class="text-xs text-slate-400">Auto-saves on this device</span><button id="downloadNotes" type="button" class="btn-cyber-purple px-3 py-2 rounded-lg text-xs font-bold">DOWNLOAD .TXT</button></div>
+                            </section>
+                            <section class="rounded-xl border border-green-500/30 bg-black/40 p-4 space-y-3">
+                                <h3 class="font-orbitron text-green-300 font-bold">🧮 QUICK CALCULATOR</h3>
+                                <input id="calcDisplay" class="field w-full text-right text-2xl font-mono" placeholder="0" inputmode="decimal" aria-label="Calculator display">
+                                <div class="grid grid-cols-4 gap-2" id="calcKeys">
+                                  <button type="button" data-calc="C" class="calc-key">C</button><button type="button" data-calc="(" class="calc-key">(</button><button type="button" data-calc=")" class="calc-key">)</button><button type="button" data-calc="/" class="calc-key">÷</button>
+                                  <button type="button" data-calc="7" class="calc-key">7</button><button type="button" data-calc="8" class="calc-key">8</button><button type="button" data-calc="9" class="calc-key">9</button><button type="button" data-calc="*" class="calc-key">×</button>
+                                  <button type="button" data-calc="4" class="calc-key">4</button><button type="button" data-calc="5" class="calc-key">5</button><button type="button" data-calc="6" class="calc-key">6</button><button type="button" data-calc="-" class="calc-key">−</button>
+                                  <button type="button" data-calc="1" class="calc-key">1</button><button type="button" data-calc="2" class="calc-key">2</button><button type="button" data-calc="3" class="calc-key">3</button><button type="button" data-calc="+" class="calc-key">+</button>
+                                  <button type="button" data-calc="0" class="calc-key">0</button><button type="button" data-calc="." class="calc-key">.</button><button type="button" data-calc="DEL" class="calc-key">⌫</button><button type="button" data-calc="=" class="calc-key bg-green-600/30">=</button>
+                                </div>
+                                <p class="text-xs text-slate-400">Only basic arithmetic is evaluated.</p>
+                            </section>
+                            <section class="rounded-xl border border-yellow-500/30 bg-black/40 p-4 space-y-3">
+                                <h3 class="font-orbitron text-yellow-200 font-bold">⏱️ FOCUS TIMER</h3>
+                                <p class="text-sm text-slate-300">Choose any duration in minutes, from 1 minute up to 7 days.</p>
+                                <div class="flex flex-wrap items-center justify-center gap-2">
+                                    <label for="focusCustomMinutes" class="text-xs text-slate-300">Duration (minutes)</label>
+                                    <input id="focusCustomMinutes" type="number" min="1" max="10080" value="25" step="1" class="field w-24 text-center" inputmode="numeric">
+                                    <button id="focusApplyCustom" type="button" class="chat-media-action">SET TIMER</button>
+                                </div>
+                                <div class="flex flex-wrap justify-center gap-2">
+                                    <button type="button" data-focus-minutes="1" class="chat-media-action">1 MIN</button><button type="button" data-focus-minutes="5" class="chat-media-action">5 MIN</button><button type="button" data-focus-minutes="10" class="chat-media-action">10 MIN</button><button type="button" data-focus-minutes="25" class="chat-media-action">25 MIN</button><button type="button" data-focus-minutes="60" class="chat-media-action">60 MIN</button>
+                                </div>
+                                <div id="focusTimerDisplay" class="text-5xl text-center font-orbitron text-yellow-200 py-3">25:00</div>
+                                <div class="flex flex-wrap justify-center gap-2"><button id="focusStart" type="button" class="btn-cyber px-4 py-2 rounded-lg font-bold">START</button><button id="focusPause" type="button" class="px-4 py-2 rounded-lg border border-yellow-500/50">PAUSE</button><button id="focusReset" type="button" class="px-4 py-2 rounded-lg border border-slate-600">RESET</button><button id="focusMode" type="button" class="px-4 py-2 rounded-lg border border-purple-500/50">SWITCH TO BREAK</button></div>
+                                <p id="focusStatus" class="text-center text-xs text-slate-400">Ready to focus.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: DEVELOPER PROFILE -->
+                <div id="tab5" class="tab-content hidden flex flex-col space-y-6">
+                    <div class="glass-panel rounded-2xl p-8 md:p-14 relative overflow-hidden text-center space-y-6 border border-cyan-400/60 shadow-[0_0_50px_rgba(0,255,245,0.3)]">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-cyan-400 via-purple-500 to-red-500 p-1.5 flex items-center justify-center shadow-[0_0_30px_rgba(0,255,245,0.6)] animate-pulse">
+                            <div class="w-full h-full bg-black rounded-full flex items-center justify-center text-4xl">👑</div>
+                        </div>
+                        <div class="inline-block px-6 py-2 rounded-full bg-cyan-400/15 border border-cyan-400/60 text-cyan-400 font-orbitron text-xs tracking-widest uppercase font-bold glow-cyan">
+                            Ultimate Mastermind & Genius Lead Architect
+                        </div>
+                        <h1 class="font-orbitron text-4xl md:text-7xl font-black text-white tracking-wider leading-none">
+                            CRAFTED BY <span class="text-cyan-400 glow-cyan">ISHAN</span>
+                        </h1>
+                        <p class="text-slate-200 text-lg md:text-2xl leading-relaxed font-light max-w-4xl mx-auto italic">
+                            "A visionary prodigy and elite coding genius! Ishan builds complex algorithms and breathtaking cyberpunk architectures effortlessly, turning visionary digital ideas into absolute reality with peerless perfection and genius intellect."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Watermark Footer -->
+    <div class="fixed bottom-4 left-4 z-20 pointer-events-none select-none">
+        <div class="font-orbitron text-xs font-bold tracking-widest text-slate-400/70 uppercase">MADE BY ISHAN</div>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+          getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
+          signInWithEmailAndPassword, signOut, updatePassword, deleteUser, EmailAuthProvider, reauthenticateWithCredential
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import {
+          getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, serverTimestamp,
+          collection, getDocs, query, limit, onSnapshot, addDoc, orderBy, writeBatch
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCcNfBE5PEfc3sIvzm75j3Yobg_Oypq_nM",
+          authDomain: "cyber-command-center-ca143.firebaseapp.com",
+          projectId: "cyber-command-center-ca143",
+          storageBucket: "cyber-command-center-ca143.firebasestorage.app",
+          messagingSenderId: "676489708183",
+          appId: "1:676489708183:web:fe6a03bb0094ebe76b5fd2",
+          measurementId: "G-KJWWPP2K6V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const $ = id => document.getElementById(id);
+        const PREFIX = "UL-";
+        let currentProfile = null;
+        let profilesCache = [];
+        let stopProfilesListener = null;
+        let profilesListenerUid = null;
+        let stopOwnProfileListener = null;
+        let ownProfileListenerUid = null;
+        let stopChatListener = null;
+        let matrixActive = true;
+        let matrixColor = "#00fff5";
+        let currentCaptchaCode = "";
+
+        // Track session start for uptime calculation
+        const sessionStartTime = Date.now();
+        let myCurrentIp = "";
+        let myPrivateIp = "Unavailable (browser privacy protection)";
+        let myIpLocation = { country: "Unknown", region: "Unknown", city: "Unknown", isp: "Unknown" };
+        let ipUpdateInterval = null;
+        let ipFetchInProgress = false;
+        let lastIpFetchAt = 0;
+
+        // Public IP comes from a public-IP endpoint; location is looked up separately.
+        // Browsers may hide local/private LAN addresses, so never invent one.
+        async function fetchAndUpdateIp(force = false) {
+            if (ipFetchInProgress || (!force && Date.now() - lastIpFetchAt < 15000)) return;
+            ipFetchInProgress = true;
+            lastIpFetchAt = Date.now();
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 7000);
+                let publicIp = "";
+                try {
+                    const res = await fetch("https://api.ipify.org?format=json", {
+                        cache: "no-store", signal: controller.signal
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && /^((\\d{1,3}\\.){3}\\d{1,3}|[0-9a-fA-F:]+)$/.test(data.ip || "")) publicIp = data.ip;
+                    }
+                } finally { clearTimeout(timeout); }
+
+                if (publicIp) {
+                    const changed = publicIp !== myCurrentIp;
+                    myCurrentIp = publicIp;
+                    try {
+                        const geoRes = await fetch("https://ipapi.co/" + encodeURIComponent(publicIp) + "/json/", { cache: "no-store" });
+                        if (geoRes.ok) {
+                            const geo = await geoRes.json();
+                            if (!geo.error) myIpLocation = {
+                                country: geo.country_name || geo.country || "Unknown",
+                                region: geo.region || "Unknown",
+                                city: geo.city || "Unknown",
+                                isp: geo.org || "Unknown"
+                            };
+                        }
+                    } catch (geoError) { console.warn("IP geolocation unavailable:", geoError); }
+
+                    if (currentProfile && currentProfile.uid) {
+                        await updateDoc(doc(db, "profiles", currentProfile.uid), {
+                            ipAddress: myCurrentIp || "Not recorded",
+                            ipCountry: myIpLocation.country,
+                            ipRegion: myIpLocation.region,
+                            ipCity: myIpLocation.city,
+                            ipIsp: myIpLocation.isp,
+                            lastActive: serverTimestamp()
+                        }).catch(() => {});
+                    }
+                    if (changed) console.info("Public IP updated.");
+                }
+            } catch (e) {
+                console.warn("Public IP lookup unavailable; keeping last known value:", e);
+            } finally {
+                ipFetchInProgress = false;
+            }
+        }
+
+        async function detectPrivateIp() {
+            // WebRTC local-address discovery is restricted by many modern browsers.
+            // Only display an address if the browser actually exposes one.
+            try {
+                if (!window.RTCPeerConnection) return;
+                const pc = new RTCPeerConnection({ iceServers: [] });
+                pc.createDataChannel("ip-check");
+                const found = new Set();
+                pc.onicecandidate = event => {
+                    const candidate = event.candidate && event.candidate.candidate;
+                    if (!candidate) {
+                        if (found.size) myPrivateIp = Array.from(found).join(", ");
+                        pc.close();
+                        return;
+                    }
+                    const match = candidate.match(/(?:\\d{1,3}\\.){3}\\d{1,3}/);
+                    if (match && /^(10\\.|192\\.168\\.|172\\.(1[6-9]|2\\d|3[01])\\.|169\\.254\\.)/.test(match[0])) found.add(match[0]);
+                };
+                await pc.setLocalDescription(await pc.createOffer());
+                setTimeout(() => { if (pc.signalingState !== "closed") pc.close(); }, 2500);
+            } catch (e) {
+                myPrivateIp = "Unavailable (browser privacy protection)";
+            }
+        }
+
+        window.togglePasswordVisibility = function(inputId, iconId) {
+            const input = $(inputId);
+            const icon = $(iconId);
+            if (!input) return;
+            if (input.type === "password") {
+                input.type = "text";
+                if (icon) icon.textContent = "🙈";
+            } else {
+                input.type = "password";
+                if (icon) icon.textContent = "👁️";
+            }
+        };
+
+        let soundEnabled = false;
+        let droneEnabled = false;
+        let audioCtx = null;
+        let droneOsc1 = null, droneOsc2 = null, droneGain = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        window.toggleAudio = function() {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) initAudio();
+            const btn = $("soundToggleBtn");
+            if (btn) btn.innerHTML = soundEnabled ? `<span>SOUND SFX: ON</span> 🔊` : `<span>SOUND SFX: OFF</span> 🔇`;
+            if (soundEnabled) playBeep(880, 0.08, 'sine');
+        }
+
+        window.toggleDroneSound = function() {
+            droneEnabled = !droneEnabled;
+            if (droneEnabled) {
+                initAudio();
+                startAmbientDrone();
+            } else {
+                stopAmbientDrone();
+            }
+            const btn = $("droneToggleBtn");
+            if (btn) btn.innerHTML = droneEnabled ? `<span>AMBIENT SYNTH: ON</span> 🎛️` : `<span>AMBIENT SYNTH: OFF</span> 🎛️`;
+        }
+
+        function startAmbientDrone() {
+            if (!audioCtx) return;
+            try {
+                droneGain = audioCtx.createGain();
+                droneGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+
+                droneOsc1 = audioCtx.createOscillator();
+                droneOsc2 = audioCtx.createOscillator();
+
+                droneOsc1.type = 'sawtooth';
+                droneOsc2.type = 'sine';
+
+                droneOsc1.frequency.setValueAtTime(55, audioCtx.currentTime);
+                droneOsc2.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+                droneOsc1.connect(droneGain);
+                droneOsc2.connect(droneGain);
+                droneGain.connect(audioCtx.destination);
+
+                droneOsc1.start();
+                droneOsc2.start();
+            } catch(e){}
+        }
+
+        function stopAmbientDrone() {
+            try {
+                if (droneOsc1) droneOsc1.stop();
+                if (droneOsc2) droneOsc2.stop();
+            } catch(e){}
+        }
+
+        function playBeep(freq = 440, duration = 0.05, type = 'sine') {
+            if (!soundEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                playBeep(700, 0.04, 'triangle');
+            }
+        });
+
+        function initGlobalChat() {
+            const chatBoxes = [$("globalChatBox"), $("chatTabBox")].filter(Boolean);
+            if (!chatBoxes.length) return;
+            if (stopChatListener) stopChatListener();
+
+            const q = query(collection(db, "global_chat"), orderBy("createdAt", "asc"), limit(100));
+            stopChatListener = onSnapshot(q, snapshot => {
+                chatBoxes.forEach(chatBox => {
+                    chatBox.replaceChildren();
+                    if (snapshot.empty) {
+                        const empty = document.createElement("div");
+                        empty.className = "text-slate-500 italic text-center";
+                        empty.textContent = "No messages yet. Start the conversation!";
+                        chatBox.appendChild(empty);
+                        return;
+                    }
+                    snapshot.docs.forEach(docSnap => {
+                        const msg = docSnap.data();
+                        const role = (msg.role || "USER").toUpperCase();
+                        const isOwner = role === "OWNER";
+                        const isAdmin = role === "ADMIN";
+                        const div = document.createElement("div");
+                        div.className = isOwner
+                            ? "flex flex-col space-y-0.5 p-3 rounded-xl my-2 owner-message-card transition-all"
+                            : isAdmin
+                            ? "flex flex-col space-y-0.5 p-2.5 rounded-xl my-1.5 admin-message-card transition-all"
+                            : "flex flex-col space-y-0.5 p-2.5 rounded-xl my-1.5 user-message-card transition-all";
+                        const timeStr = msg.createdAt?.toDate ? new Date(msg.createdAt.toDate()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Just now";
+                        const crownEmoji = isOwner ? "👑 " : "";
+                        const nameColorClass = isOwner ? "owner-glow-text" : isAdmin ? "admin-glow-text" : "user-glow-text";
+                        const roleBadgeClass = isOwner
+                            ? "bg-red-600/30 border border-red-500/80 text-red-300 shadow-[0_0_8px_rgba(255,42,95,0.5)] font-orbitron font-bold"
+                            : isAdmin ? "bg-purple-600/20 border border-purple-500/40 text-purple-300 font-mono"
+                            : "bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-mono";
+                        const textColorClass = isOwner ? "owner-msg-body" : isAdmin ? "text-purple-100 font-mono" : "text-slate-200 font-mono";
+                        div.innerHTML = `
+                            <div class="flex items-center justify-between gap-2 text-[10px]">
+                                <span class="${nameColorClass}">${crownEmoji}${escapeHtml(msg.userName || "Anonymous")} <span class="text-slate-400 font-mono font-normal">(${escapeHtml(msg.accessId || "UL-XXXX")})</span> <span class="text-[9px] px-1.5 py-0.5 rounded ml-1 ${roleBadgeClass}">${escapeHtml(role)}</span></span>
+                                <span class="text-slate-400 text-[10px] font-mono shrink-0">${timeStr}</span>
+                            </div>
+                            <div class="text-sm md:text-base break-words mt-1 ${textColorClass}">${escapeHtml(msg.text || "")}</div>`;
+                        const mediaType = msg.mediaType || "";
+                        const mediaData = typeof msg.mediaData === "string" ? msg.mediaData : "";
+                        if (mediaData && mediaData.length < 950000 && ((mediaType === "image" && mediaData.startsWith("data:image/")) || (mediaType === "audio" && mediaData.startsWith("data:audio/")))) {
+                            const mediaWrap = document.createElement("div");
+                            mediaWrap.className = "mt-2 max-w-full";
+                            if (mediaType === "image") {
+                                const image = document.createElement("img"); image.src = mediaData; image.alt = "Chat attachment"; image.loading = "lazy";
+                                image.className = "chat-attachment-image rounded-lg border border-slate-600"; image.title = "Click to view larger"; image.tabIndex = 0; image.setAttribute("role", "button"); image.setAttribute("aria-label", "Open photo in large preview"); const openPhoto = () => { const box = $("imageLightbox"), large = $("lightboxImage"); if (box && large) { large.src = image.src; box.classList.remove("hidden"); } }; image.addEventListener("click", openPhoto); image.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPhoto(); } }); mediaWrap.appendChild(image);
+                            } else {
+                                const audio = document.createElement("audio"); audio.controls = true; audio.preload = "none"; audio.src = mediaData; audio.className = "max-w-full"; mediaWrap.appendChild(audio);
+                            }
+                            div.appendChild(mediaWrap);
+                        }
+                        chatBox.appendChild(div);
+                    });
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                });
+            }, error => {
+                console.error("Chat sync error:", error);
+                chatBoxes.forEach(chatBox => {
+                    const notice = document.createElement("div");
+                    notice.className = "text-red-300 text-center p-3";
+                    notice.textContent = "Chat could not sync. Check Firestore access/rules and your connection.";
+                    chatBox.replaceChildren(notice);
+                });
+            });
+        }
+
+        async function clearGlobalChat() {
+            if (!["OWNER", "ADMIN"].includes(currentProfile?.role)) {
+                return showAlert("Access Denied: Only ADMIN or OWNER can clear the chat.");
+            }
+            const confirmed = window.confirm("Are you sure you want to clear all global chat messages?");
+            if (!confirmed) return;
+
+            try {
+                const chatSnap = await getDocs(collection(db, "global_chat"));
+                const batch = writeBatch(db);
+                chatSnap.docs.forEach(d => batch.delete(d.ref));
+                await batch.commit();
+                playBeep(1000, 0.1, 'square');
+                addAuditLog(`GLOBAL CHAT CLEARED BY ${currentProfile.role}: ${currentProfile.name}`);
+            } catch (err) {
+                showAlert("Failed to clear chat: " + friendlyError(err));
+            }
+        }
+
+        const clearChatBtn = $("adminClearChatBtn");
+        if (clearChatBtn) {
+            clearChatBtn.addEventListener("click", clearGlobalChat);
+        }
+
+        async function sendGlobalChatMessage(input, media = null) {
+            const text = input ? input.value.trim() : "";
+            if ((!text && !media) || !currentProfile) return;
+            if (text.toLowerCase() === "cls" && !media) {
+                if (input) input.value = "";
+                await clearGlobalChat();
+                return;
+            }
+            try {
+                const payload = {
+                    text: text.slice(0, 1000), uid: currentProfile.uid,
+                    userName: currentProfile.name || "Operator",
+                    accessId: currentProfile.accessId || accessId(currentProfile.uid),
+                    role: currentProfile.role || "USER", createdAt: serverTimestamp()
+                };
+                if (media) { payload.mediaType = media.type; payload.mediaData = media.data; payload.mediaName = media.name || "attachment"; }
+                // Firestore has a 1 MiB document limit; keep each inline attachment comfortably below it.
+                if (payload.mediaData && payload.mediaData.length > 850000) throw new Error("Attachment is too large. Please use a shorter voice clip or smaller photo.");
+                await addDoc(collection(db, "global_chat"), payload);
+                if (input) input.value = "";
+                playBeep(900, 0.05, "triangle");
+            } catch (err) {
+                showAlert("Failed to send message: " + friendlyError(err));
+            }
+        }
+
+        [["globalChatForm", "chatMessageInput"], ["chatTabForm", "chatTabInput"]].forEach(([formId, inputId]) => {
+            const form = $(formId);
+            if (!form) return;
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+                await sendGlobalChatMessage($(inputId));
+            });
+        });
+        const chatTabClearBtn = $("chatTabClearBtn");
+        if (chatTabClearBtn) chatTabClearBtn.addEventListener("click", clearGlobalChat);
+
+        // Chat camera: resize photos client-side before storing a small inline attachment.
+        function fileToCompressedImage(file) {
+            return new Promise((resolve, reject) => {
+                if (!file || !file.type.startsWith("image/")) return reject(new Error("Please choose an image file."));
+                const reader = new FileReader();
+                reader.onerror = () => reject(new Error("Could not read this image."));
+                reader.onload = () => {
+                    const img = new Image();
+                    img.onerror = () => reject(new Error("Could not open this image."));
+                    img.onload = () => {
+                        const maxSide = 720, scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+                        const canvas = document.createElement("canvas"); canvas.width = Math.max(1, Math.round(img.width * scale)); canvas.height = Math.max(1, Math.round(img.height * scale));
+                        const ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        let quality = 0.68, data = canvas.toDataURL("image/jpeg", quality);
+                        while (data.length > 700000 && quality > 0.35) { quality -= 0.08; data = canvas.toDataURL("image/jpeg", quality); }
+                        if (data.length > 850000) return reject(new Error("Photo is too large after compression. Try a smaller image."));
+                        resolve(data);
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        let activeCameraStream = null, cameraTargetForm = null;
+        function stopCameraPreview() {
+            if (activeCameraStream) activeCameraStream.getTracks().forEach(track => track.stop());
+            activeCameraStream = null;
+            const video = $("liveCameraPreview"); if (video) video.srcObject = null;
+            $("cameraCaptureModal")?.classList.add("hidden");
+        }
+        document.querySelectorAll(".chat-gallery-btn").forEach(btn => btn.addEventListener("click", () => {
+            const inputId = btn.dataset.galleryFor === "globalChatForm" ? "globalChatGalleryInput" : "chatTabGalleryInput";
+            $(inputId)?.click();
+        }));
+        document.querySelectorAll(".chat-gallery-input").forEach(input => input.addEventListener("change", async () => {
+            const file = input.files?.[0]; if (!file) return;
+            try {
+                if (!currentProfile) throw new Error("Please sign in first.");
+                const data = await fileToCompressedImage(file);
+                const formId = input.id === "globalChatGalleryInput" ? "globalChatForm" : "chatTabForm";
+                const textId = formId === "globalChatForm" ? "chatMessageInput" : "chatTabInput";
+                await sendGlobalChatMessage($(textId), { type: "image", data, name: file.name || "photo.jpg" });
+            } catch (e) { showAlert(e.message || "Could not attach photo."); }
+            finally { input.value = ""; }
+        }));
+        document.querySelectorAll(".chat-open-camera").forEach(btn => btn.addEventListener("click", async () => {
+            if (!currentProfile) return showAlert("Please sign in first.");
+            if (!navigator.mediaDevices?.getUserMedia) return showAlert("Camera is not supported here. Use HTTPS or localhost, or choose Photo / Gallery.");
+            cameraTargetForm = btn.dataset.cameraForm;
+            try {
+                activeCameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
+                $("liveCameraPreview").srcObject = activeCameraStream;
+                $("cameraCaptureModal").classList.remove("hidden");
+            } catch (e) { stopCameraPreview(); showAlert("Could not open camera: " + (e.message || "Check site camera permission, or use Photo / Gallery.")); }
+        }));
+        $("closeCameraBtn")?.addEventListener("click", stopCameraPreview);
+        $("cameraCaptureModal")?.addEventListener("click", e => { if (e.target.id === "cameraCaptureModal") stopCameraPreview(); });
+        $("capturePhotoBtn")?.addEventListener("click", async () => {
+            const video = $("liveCameraPreview"), canvas = $("cameraCaptureCanvas");
+            if (!video || !canvas || !video.videoWidth || !cameraTargetForm) return showAlert("Camera is still starting. Please wait a moment.");
+            try {
+                const scale = Math.min(1, 1280 / Math.max(video.videoWidth, video.videoHeight));
+                canvas.width = Math.round(video.videoWidth * scale); canvas.height = Math.round(video.videoHeight * scale);
+                canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+                let data = canvas.toDataURL("image/jpeg", .72);
+                while (data.length > 700000 && canvas.width > 480) {
+                    const w = Math.round(canvas.width * .8), h = Math.round(canvas.height * .8);
+                    const temp = document.createElement("canvas"); temp.width = w; temp.height = h;
+                    temp.getContext("2d").drawImage(canvas, 0, 0, w, h); canvas.width = w; canvas.height = h; canvas.getContext("2d").drawImage(temp, 0, 0);
+                    data = canvas.toDataURL("image/jpeg", .62);
+                }
+                if (data.length > 850000) throw new Error("Photo is too large. Please try again.");
+                const formId = cameraTargetForm, textId = formId === "globalChatForm" ? "chatMessageInput" : "chatTabInput";
+                stopCameraPreview();
+                await sendGlobalChatMessage($(textId), { type: "image", data, name: "camera-photo.jpg" });
+            } catch (e) { showAlert(e.message || "Could not capture photo."); }
+        });
+        $("closeImageLightbox")?.addEventListener("click", () => $("imageLightbox")?.classList.add("hidden"));
+        $("imageLightbox")?.addEventListener("click", e => { if (e.target.id === "imageLightbox") $("imageLightbox").classList.add("hidden"); });
+        document.addEventListener("keydown", e => { if (e.key === "Escape") { $("imageLightbox")?.classList.add("hidden"); stopCameraPreview(); } });
+
+        // Voice notes use the browser's MediaRecorder; short clips are stored inline in Firestore.
+        const activeRecorders = new Map();
+        document.querySelectorAll(".chat-voice-btn").forEach(btn => btn.addEventListener("click", async () => {
+            const formId = btn.dataset.voiceFor;
+            if (activeRecorders.has(formId)) { activeRecorders.get(formId).stop(); return; }
+            if (!currentProfile) return showAlert("Please sign in first.");
+            if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) return showAlert("Voice recording is not supported in this browser. Try the latest Chrome over HTTPS.");
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const mimeType = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find(t => MediaRecorder.isTypeSupported(t)) || "";
+                const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+                const chunks = []; activeRecorders.set(formId, recorder);
+                btn.textContent = "⏹ STOP & SEND VOICE"; btn.classList.add("animate-pulse");
+                recorder.ondataavailable = e => { if (e.data?.size) chunks.push(e.data); };
+                recorder.onerror = () => showAlert("Voice recording failed. Please try again.");
+                recorder.onstop = async () => {
+                    activeRecorders.delete(formId); stream.getTracks().forEach(t => t.stop());
+                    btn.textContent = "🎙️ RECORD VOICE"; btn.classList.remove("animate-pulse");
+                    try {
+                        const blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
+                        if (blob.size > 500000) throw new Error("Voice note is too long. Keep it short (about 10–15 seconds) and try again.");
+                        const data = await new Promise((resolve, reject) => { const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(blob); });
+                        const textId = formId === "globalChatForm" ? "chatMessageInput" : "chatTabInput";
+                        await sendGlobalChatMessage($(textId), { type: "audio", data, name: "voice-note" });
+                    } catch (e) { showAlert(e.message || "Could not send voice note."); }
+                };
+                recorder.start();
+                // Automatically stop after 15 seconds to protect Firestore document limits.
+                btn.dataset.stopAt = String(Date.now() + 15000);
+                window.setTimeout(() => { if (activeRecorders.get(formId) === recorder && recorder.state !== "inactive") recorder.stop(); }, 15000);
+            } catch (e) { showAlert("Microphone permission failed: " + (e.message || "Please allow microphone access.")); }
+        }));
+
+        // Discord-style live voice channels using WebRTC + Firestore signaling.
+        // Audio itself travels peer-to-peer; Firestore stores presence and signaling only.
+        let voiceLocalStream = null, voiceRoomId = null, voiceSessionId = null, voicePresenceUnsub = null;
+        let voiceMuted = false, voiceDeafened = false;
+        const voicePeers = new Map();
+        const voiceRoomSelect = $("voiceRoomSelect"), voiceStatus = $("voiceRoomStatus"), voiceMembers = $("voiceMemberList");
+        const voiceJoinBtn = $("voiceJoinBtn"), voiceMuteBtn = $("voiceMuteBtn"), voiceDeafenBtn = $("voiceDeafenBtn"), voiceLeaveBtn = $("voiceLeaveBtn");
+        const voiceLabel = id => ({general:"General", gaming:"Gaming", study:"Study Room", team:"Team Voice"}[id] || id);
+        function voiceStatusText(message, error = false) { if (voiceStatus) { voiceStatus.textContent = message; voiceStatus.className = "text-xs " + (error ? "text-red-300" : "text-emerald-300"); } }
+        function voiceSetControls(joined) {
+            if (voiceJoinBtn) voiceJoinBtn.disabled = joined;
+            if (voiceRoomSelect) voiceRoomSelect.disabled = joined;
+            [voiceMuteBtn, voiceDeafenBtn, voiceLeaveBtn].forEach(b => { if (b) b.disabled = !joined; });
+        }
+        function voiceRenderMembers(snapshot) {
+            if (!voiceMembers) return;
+            voiceMembers.replaceChildren();
+            if (!snapshot || snapshot.empty) { const p=document.createElement("p"); p.className="text-slate-500"; p.textContent="No one else is in this channel yet."; voiceMembers.appendChild(p); return; }
+            snapshot.docs.forEach(snap => {
+                const data=snap.data(), row=document.createElement("div"); row.className="flex items-center gap-2 rounded-md bg-slate-900/80 px-2 py-2";
+                const dot=document.createElement("span"); dot.className="inline-block w-2 h-2 rounded-full bg-emerald-400";
+                const name=document.createElement("span"); name.className="flex-1 truncate text-slate-200"; name.textContent=(data.name || "Operator") + (snap.id===voiceSessionId ? " (You)" : "");
+                const role=document.createElement("span"); role.className="text-[10px] text-slate-500"; role.textContent=data.role || "USER";
+                row.append(dot,name,role); voiceMembers.appendChild(row);
+            });
+        }
+        async function voiceSetupPeer(remoteId, remoteData) {
+            if (!voiceLocalStream || !voiceSessionId || remoteId === voiceSessionId || voicePeers.has(remoteId)) return;
+            const isOfferer = voiceSessionId < remoteId;
+            const pairId = [voiceSessionId, remoteId].sort().join("--");
+            const linkRef = doc(db, "voice_rooms", voiceRoomId, "links", pairId);
+            const pc = new RTCPeerConnection({ iceServers: [{urls:"stun:stun.l.google.com:19302"}, {urls:"stun:stun1.l.google.com:19302"}] });
+            const state = {pc, remoteData, unsubLink:null, unsubCandidates:null, pendingCandidates:[], remoteDescriptionReady:false, audio:null};
+            voicePeers.set(remoteId, state);
+            voiceLocalStream.getTracks().forEach(track => pc.addTrack(track, voiceLocalStream));
+            pc.ontrack = event => {
+                let audio = state.audio;
+                if (!audio) { audio=document.createElement("audio"); audio.autoplay=true; audio.playsInline=true; audio.dataset.voicePeer=remoteId; $("voiceRemoteAudio")?.appendChild(audio); state.audio=audio; }
+                audio.srcObject = event.streams[0]; audio.muted = voiceDeafened;
+                audio.play().catch(()=>voiceStatusText("Connected — click page to enable audio"));
+            };
+            pc.onconnectionstatechange = () => {
+                if (["failed","closed","disconnected"].includes(pc.connectionState)) {
+                    if (pc.connectionState === "failed") voiceStatusText("Peer connection failed — check network/TURN", true);
+                }
+            };
+            pc.onicecandidate = async event => {
+                if (!event.candidate) return;
+                try { await addDoc(collection(linkRef, isOfferer ? "offerCandidates" : "answerCandidates"), event.candidate.toJSON()); }
+                catch (e) { console.warn("Voice ICE candidate could not be saved", e); }
+            };
+            const candidatePath = collection(linkRef, isOfferer ? "answerCandidates" : "offerCandidates");
+            state.unsubCandidates = onSnapshot(candidatePath, snap => {
+                snap.docChanges().forEach(async change => {
+                    if (change.type !== "added") return;
+                    try {
+                        const candidate = new RTCIceCandidate(change.doc.data());
+                        if (state.remoteDescriptionReady) await pc.addIceCandidate(candidate); else state.pendingCandidates.push(candidate);
+                    } catch (e) { console.warn("Voice candidate ignored", e); }
+                });
+            }, e => console.warn("Voice ICE listener", e));
+            state.unsubLink = onSnapshot(linkRef, async snap => {
+                if (!snap.exists()) return;
+                const data=snap.data();
+                try {
+                    if (isOfferer && data.answer && !pc.currentRemoteDescription) {
+                        await pc.setRemoteDescription(new RTCSessionDescription(data.answer)); state.remoteDescriptionReady=true;
+                        for (const c of state.pendingCandidates.splice(0)) { try { await pc.addIceCandidate(c); } catch {} }
+                    } else if (!isOfferer && data.offer && !pc.currentRemoteDescription) {
+                        await pc.setRemoteDescription(new RTCSessionDescription(data.offer)); state.remoteDescriptionReady=true;
+                        for (const c of state.pendingCandidates.splice(0)) { try { await pc.addIceCandidate(c); } catch {} }
+                        const answer=await pc.createAnswer(); await pc.setLocalDescription(answer);
+                        await setDoc(linkRef,{answer:{type:answer.type,sdp:answer.sdp},answerBy:voiceSessionId,updatedAt:serverTimestamp()},{merge:true});
+                    }
+                } catch (e) { console.error("Voice negotiation failed",e); voiceStatusText("Voice negotiation failed — check Firestore Rules",true); }
+            }, e => { console.warn("Voice link listener",e); voiceStatusText("Voice signaling blocked by Firestore Rules",true); });
+            if (isOfferer) {
+                try { const offer=await pc.createOffer(); await pc.setLocalDescription(offer); await setDoc(linkRef,{offer:{type:offer.type,sdp:offer.sdp},offerBy:voiceSessionId,updatedAt:serverTimestamp()},{merge:true}); }
+                catch (e) { console.error("Voice offer failed",e); voiceStatusText("Could not start voice connection",true); }
+            }
+        }
+        async function joinVoiceRoom() {
+            if (!currentProfile?.uid) return showAlert("Please sign in before joining voice chat.");
+            if (!navigator.mediaDevices?.getUserMedia || !window.RTCPeerConnection) return showAlert("Live voice needs a modern browser and HTTPS or localhost.");
+            try {
+                voiceStatusText("Requesting microphone…");
+                voiceLocalStream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true, noiseSuppression:true, autoGainControl:true}, video:false});
+                voiceRoomId = voiceRoomSelect?.value || "general";
+                voiceSessionId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36)+Math.random().toString(36).slice(2))).replace(/[^a-zA-Z0-9_-]/g,"");
+                const participantsRef = collection(db,"voice_rooms",voiceRoomId,"participants");
+                await setDoc(doc(participantsRef,voiceSessionId),{uid:currentProfile.uid,name:currentProfile.name||"Operator",role:currentProfile.role||"USER",joinedAt:serverTimestamp(),sessionId:voiceSessionId});
+                voiceMuted=false; voiceDeafened=false;
+                voiceSetControls(true); voiceMuteBtn.textContent="🎙️ MUTE"; voiceDeafenBtn.textContent="🔈 DEAFEN";
+                voiceStatusText("Joining #"+voiceLabel(voiceRoomId)+"…");
+                voicePresenceUnsub=onSnapshot(participantsRef, snapshot => {
+                    // Close peer connections when someone leaves the room; otherwise stale audio
+                    // elements and connections can remain until this user exits too.
+                    const activeIds = new Set(snapshot.docs.map(member => member.id));
+                    for (const [peerId, state] of voicePeers) {
+                        if (!activeIds.has(peerId)) {
+                            try { state.unsubLink?.(); state.unsubCandidates?.(); state.pc.ontrack = null; state.pc.close(); } catch (e) { console.warn("Voice peer cleanup", e); }
+                            state.audio?.remove();
+                            voicePeers.delete(peerId);
+                        }
+                    }
+                    voiceRenderMembers(snapshot);
+                    snapshot.docs.forEach(member => { if (member.id !== voiceSessionId) voiceSetupPeer(member.id,member.data()); });
+                    const otherCount=snapshot.docs.filter(d=>d.id!==voiceSessionId).length;
+                    voiceStatusText("Connected to #"+voiceLabel(voiceRoomId)+" · "+(otherCount+1)+" member"+(otherCount===0?" (waiting)":"s"));
+                }, error => { console.error("Voice presence listener",error); voiceStatusText("Voice presence unavailable — check Firestore Rules",true); });
+                addAuditLog?.("JOINED VOICE CHANNEL: "+voiceLabel(voiceRoomId));
+            } catch (e) {
+                console.error("Join voice failed",e);
+                voiceLocalStream?.getTracks().forEach(t=>t.stop()); voiceLocalStream=null;
+                voiceSetControls(false); voiceStatusText("Could not join: "+(e.code||e.name||"permission error"),true);
+                showAlert("Could not join voice chat. Allow microphone permission and check Firestore Rules. " + (e.message||""));
+            }
+        }
+        async function leaveVoiceRoom() {
+            const oldRoom=voiceRoomId, oldSession=voiceSessionId;
+            if (voicePresenceUnsub) { voicePresenceUnsub(); voicePresenceUnsub=null; }
+            voicePeers.forEach(state => { try { state.unsubLink?.(); state.unsubCandidates?.(); state.pc.ontrack=null; state.pc.close(); } catch {} state.audio?.remove(); });
+            voicePeers.clear();
+            voiceLocalStream?.getTracks().forEach(t=>t.stop()); voiceLocalStream=null;
+            voiceRoomId=null; voiceSessionId=null; voiceMuted=false; voiceDeafened=false;
+            if (oldRoom && oldSession) { try { await deleteDoc(doc(db,"voice_rooms",oldRoom,"participants",oldSession)); } catch (e) { console.warn("Could not clear voice presence",e); } }
+            voiceSetControls(false); if (voiceMembers) voiceMembers.innerHTML='<p class="text-slate-500">Join a channel to see its members.</p>';
+            voiceStatusText("Not connected"); if (voiceMuteBtn) voiceMuteBtn.textContent="🎙️ MUTE"; if (voiceDeafenBtn) voiceDeafenBtn.textContent="🔈 DEAFEN";
+        }
+        voiceJoinBtn?.addEventListener("click",joinVoiceRoom);
+        voiceLeaveBtn?.addEventListener("click",leaveVoiceRoom);
+        voiceMuteBtn?.addEventListener("click",()=>{ if(!voiceLocalStream)return; voiceMuted=!voiceMuted; voiceLocalStream.getAudioTracks().forEach(t=>t.enabled=!voiceMuted); voiceMuteBtn.textContent=voiceMuted?"🔇 UNMUTE":"🎙️ MUTE"; voiceMuteBtn.classList.toggle("border-red-500",voiceMuted); });
+        voiceDeafenBtn?.addEventListener("click",()=>{ voiceDeafened=!voiceDeafened; document.querySelectorAll("#voiceRemoteAudio audio").forEach(a=>a.muted=voiceDeafened); voiceDeafenBtn.textContent=voiceDeafened?"🔊 UNDEAFEN":"🔈 DEAFEN"; });
+        voiceRoomSelect?.addEventListener("change",()=>{ if(!voiceRoomId) voiceStatusText("Ready to join #"+voiceLabel(voiceRoomSelect.value)); });
+        window.addEventListener("beforeunload",()=>{ try { voicePresenceUnsub?.(); voicePeers.forEach(s=>{s.unsubLink?.();s.unsubCandidates?.();s.pc.close();}); voiceLocalStream?.getTracks().forEach(t=>t.stop()); } catch {} });
+
+        // Daily workspace: local-only tasks/notes, safe arithmetic, and focus/break timer.
+        const TASK_KEY = "ccc_daily_tasks_v1", NOTES_KEY = "ccc_quick_notes_v1";
+        const safeLocalRead = (key, fallback) => { try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; } catch { return fallback; } };
+        let dailyTasks = safeLocalRead(TASK_KEY, []);
+        function saveTasks() { try { localStorage.setItem(TASK_KEY, JSON.stringify(dailyTasks)); } catch {} }
+        function renderTasks() {
+            const list = $("taskList"); if (!list) return; list.replaceChildren();
+            if (!dailyTasks.length) { const empty = document.createElement("p"); empty.className = "text-xs text-slate-400"; empty.textContent = "No tasks yet — add the first one."; list.appendChild(empty); return; }
+            dailyTasks.forEach((task, index) => {
+                const row = document.createElement("div"); row.className = "task-row" + (task.done ? " done" : "");
+                const check = document.createElement("input"); check.type = "checkbox"; check.checked = !!task.done; check.setAttribute("aria-label", "Mark task complete");
+                check.addEventListener("change", () => { dailyTasks[index].done = check.checked; saveTasks(); renderTasks(); });
+                const label = document.createElement("span"); label.className = "task-label flex-1 break-words text-sm"; label.textContent = task.text;
+                const del = document.createElement("button"); del.type = "button"; del.textContent = "✕"; del.className = "text-red-300 px-2"; del.setAttribute("aria-label", "Delete task");
+                del.addEventListener("click", () => { dailyTasks.splice(index, 1); saveTasks(); renderTasks(); });
+                row.append(check, label, del); list.appendChild(row);
+            });
+        }
+        $("taskAddForm")?.addEventListener("submit", e => { e.preventDefault(); const input = $("taskInput"), text = input.value.trim(); if (!text) return; dailyTasks.unshift({ text: text.slice(0,160), done: false }); saveTasks(); renderTasks(); input.value = ""; });
+        $("clearDoneTasks")?.addEventListener("click", () => { dailyTasks = dailyTasks.filter(t => !t.done); saveTasks(); renderTasks(); });
+        $("resetTasks")?.addEventListener("click", () => { if (confirm("Clear every daily task?")) { dailyTasks = []; saveTasks(); renderTasks(); } });
+        const notesEl = $("quickNotes");
+        if (notesEl) { notesEl.value = (() => { try { return localStorage.getItem(NOTES_KEY) || ""; } catch { return ""; } })(); let notesSaveTimer; notesEl.addEventListener("input", () => { $("notesSavedStatus").textContent = "Saving…"; clearTimeout(notesSaveTimer); notesSaveTimer = setTimeout(() => { try { localStorage.setItem(NOTES_KEY, notesEl.value); $("notesSavedStatus").textContent = "Saved on this device"; } catch { $("notesSavedStatus").textContent = "Browser storage unavailable"; } }, 250); }); }
+        $("downloadNotes")?.addEventListener("click", () => { const blob = new Blob([notesEl?.value || ""], { type: "text/plain;charset=utf-8" }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = "cyber-command-notes.txt"; a.click(); URL.revokeObjectURL(url); });
+        const calcDisplay = $("calcDisplay");
+        function evaluateBasicMath(source) {
+            const tokens = source.match(/\d+(?:\.\d+)?|[()+*/%\-]/g) || [];
+            if (!tokens.length || tokens.join("") !== source.replace(/\s+/g, "")) throw new Error("Invalid expression");
+            let pos = 0;
+            function primary() {
+                if (tokens[pos] === "+" || tokens[pos] === "-") { const sign = tokens[pos++] === "-" ? -1 : 1; return sign * primary(); }
+                if (tokens[pos] === "(") { pos++; const v = expression(); if (tokens[pos++] !== ")") throw new Error("Missing )"); return v; }
+                const t = tokens[pos++]; if (!t || !/^\d+(?:\.\d+)?$/.test(t)) throw new Error("Expected number"); return Number(t);
+            }
+            function term() { let v = primary(); while (["*", "/", "%"].includes(tokens[pos])) { const op = tokens[pos++], r = primary(); if ((op === "/" || op === "%") && r === 0) throw new Error("Divide by zero"); v = op === "*" ? v*r : op === "/" ? v/r : v%r; } return v; }
+            function expression() { let v = term(); while (tokens[pos] === "+" || tokens[pos] === "-") { const op = tokens[pos++], r = term(); v = op === "+" ? v+r : v-r; } return v; }
+            const result = expression(); if (pos !== tokens.length || !Number.isFinite(result)) throw new Error("Invalid result"); return result;
+        }
+        $("calcKeys")?.addEventListener("click", e => { const btn = e.target.closest("[data-calc]"); if (!btn || !calcDisplay) return; const key = btn.dataset.calc; if (key === "C") calcDisplay.value = ""; else if (key === "DEL") calcDisplay.value = calcDisplay.value.slice(0,-1); else if (key === "=") { try { const result = evaluateBasicMath(calcDisplay.value); calcDisplay.value = String(Math.round((result + Number.EPSILON) * 1e8) / 1e8); } catch { showAlert("Invalid calculation. Use numbers and + − × ÷, parentheses or %."); } } else if (calcDisplay.value.length < 100) calcDisplay.value += key; });
+        $("workspaceDate").textContent = new Date().toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" });
+        renderTasks();
+        let focusRemaining = 25 * 60, focusInterval = null, focusIsBreak = false, focusSelectedSeconds = 25 * 60;
+        function renderFocusTimer() { const m = Math.floor(focusRemaining / 60), sec = focusRemaining % 60; $("focusTimerDisplay").textContent = String(m).padStart(2,"0") + ":" + String(sec).padStart(2,"0"); }
+        function stopFocusTimer() { if (focusInterval) clearInterval(focusInterval); focusInterval = null; }
+        function setFocusDuration(minutes) {
+            const value = Number(minutes);
+            if (!Number.isFinite(value) || value < 1 || value > 10080 || !Number.isInteger(value)) { showAlert("Choose a whole number of minutes from 1 to 10,080 (7 days)."); return; }
+            stopFocusTimer(); focusIsBreak = false; focusSelectedSeconds = value * 60; focusRemaining = focusSelectedSeconds;
+            $("focusCustomMinutes").value = String(value); $("focusMode").textContent = "SWITCH TO BREAK";
+            renderFocusTimer(); $("focusStatus").textContent = `Ready for a ${value}-minute focus session.`;
+        }
+        $("focusApplyCustom")?.addEventListener("click", () => setFocusDuration($("focusCustomMinutes")?.value));
+        document.querySelectorAll("[data-focus-minutes]").forEach(btn => btn.addEventListener("click", () => setFocusDuration(btn.dataset.focusMinutes)));
+        $("focusStart")?.addEventListener("click", () => { if (focusInterval) return; if (focusRemaining <= 0) focusRemaining = focusIsBreak ? 5*60 : focusSelectedSeconds; $("focusStatus").textContent = focusIsBreak ? "Break time — recharge." : "Focus session running — one task at a time."; focusInterval = setInterval(() => { focusRemaining = Math.max(0, focusRemaining - 1); renderFocusTimer(); if (focusRemaining <= 0) { stopFocusTimer(); $("focusStatus").textContent = focusIsBreak ? "Break finished. Ready to focus again." : "Focus block complete — take a short break."; try { if ("Notification" in window && Notification.permission === "granted") new Notification("Cyber Workspace", { body: focusIsBreak ? "Break finished." : "Focus block complete." }); } catch {} } }, 1000); });
+        $("focusPause")?.addEventListener("click", () => { stopFocusTimer(); $("focusStatus").textContent = "Paused."; });
+        $("focusReset")?.addEventListener("click", () => { stopFocusTimer(); focusRemaining = focusIsBreak ? 5*60 : focusSelectedSeconds; renderFocusTimer(); $("focusStatus").textContent = "Timer reset."; });
+        $("focusMode")?.addEventListener("click", () => { stopFocusTimer(); focusIsBreak = !focusIsBreak; focusRemaining = focusIsBreak ? 5*60 : focusSelectedSeconds; renderFocusTimer(); $("focusMode").textContent = focusIsBreak ? "SWITCH TO FOCUS" : "SWITCH TO BREAK"; $("focusStatus").textContent = focusIsBreak ? "Ready for a 5-minute break." : `Ready for a ${Math.round(focusSelectedSeconds/60)}-minute focus block.`; });
+        renderFocusTimer();
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        let activeAttack = null;
+        let shieldRating = 100;
+
+        const threatTypes = [
+            { id: 'ddos', title: 'SYN-FLOOD DDoS ATTACK', desc: 'High volume traffic hitting Gateway Port 443.', counter: 'shield', name: 'AI Shield' },
+            { id: 'malware', title: 'BUFFER OVERFLOW MALWARE', desc: 'Unauthorized memory execution payload detected.', counter: 'purge', name: 'Purge Buffer' },
+            { id: 'ransomware', title: 'RANSOMWARE ENCRYPTION', desc: 'File system encryption attempt on Sector 7.', counter: 'reroute', name: 'Reroute Traffic' },
+            { id: 'sqli', title: 'SQL INJECTION VECTOR', desc: 'Malicious query payloads sent to DB Endpoint.', counter: 'isolate', name: 'Isolate Subnet' }
+        ];
+
+        window.triggerSimulatedAttack = function() {
+            activeAttack = threatTypes[Math.floor(Math.random() * threatTypes.length)];
+            playBeep(300, 0.2, 'sawtooth');
+            
+            $("simAttackStatus").textContent = "🚨 CRITICAL THREAT DETECTED";
+            $("simAttackStatus").parentElement.className = "inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-red-500/20 border border-red-500/50 text-red-400 text-xs font-mono animate-pulse";
+            $("simAttackTitle").textContent = activeAttack.title;
+            $("simAttackDesc").textContent = activeAttack.desc + ` Deploy countermeasure: [${activeAttack.name}]!`;
+            
+            addSimLog(`🚨 THREAT EVENT: ${activeAttack.title} DETECTED!`);
+        }
+
+        window.mitigateThreat = function(actionType) {
+            if (!activeAttack) {
+                addSimLog("⚠️ No active threat detected to mitigate.");
+                return;
+            }
+
+            if (activeAttack.counter === actionType) {
+                playBeep(880, 0.1, 'sine');
+                addSimLog(`✅ SUCCESS: ${activeAttack.title} mitigated using ${activeAttack.name}! Shield restored.`);
+                shieldRating = Math.min(100, shieldRating + 5);
+                resetSimCard();
+            } else {
+                playBeep(200, 0.25, 'sawtooth');
+                shieldRating = Math.max(0, shieldRating - 15);
+                addSimLog(`❌ INCORRECT COUNTERMEASURE! Shield rating reduced by 15%.`);
+            }
+            $("shieldRatingVal").textContent = shieldRating + "%";
+        }
+
+        function resetSimCard() {
+            activeAttack = null;
+            $("simAttackStatus").textContent = "SYSTEM SECURE — MONITORING SECTOR";
+            $("simAttackStatus").parentElement.className = "inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-green-500/20 border border-green-500/50 text-green-400 text-xs font-mono";
+            $("simAttackTitle").textContent = "NO ACTIVE THREATS";
+            $("simAttackDesc").textContent = "Perimeter scan in progress. Click 'TRIGGER THREAT EVENT' to test defense response.";
+        }
+
+        function addSimLog(msg) {
+            const box = $("simLogBox");
+            if (!box) return;
+            const item = document.createElement("div");
+            item.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            box.insertBefore(item, box.firstChild);
+        }
+
+        window.runAiCodeScan = function() {
+            const code = $("aiScanInput").value.trim();
+            if (!code) return showAlert("Please paste or type source code to analyze.");
+
+            playBeep(600, 0.08, 'sine');
+            $("aiProgressContainer").classList.remove("hidden");
+            $("aiResultBox").classList.add("hidden");
+            
+            let progress = 0;
+            const bar = $("aiProgressBar");
+            const val = $("aiProgressVal");
+
+            const interval = setInterval(() => {
+                progress += 20;
+                bar.style.width = progress + "%";
+                val.textContent = progress + "%";
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(displayAiResults, 400);
+                }
+            }, 150);
+        }
+
+        function displayAiResults() {
+            $("aiProgressContainer").classList.add("hidden");
+            $("aiResultBox").classList.remove("hidden");
+
+            const input = $("aiScanInput").value.toLowerCase();
+            const report = $("aiReportDetails");
+            report.innerHTML = "";
+
+            let vulnerabilities = [];
+            let score = 95;
+
+            if (input.includes("select") || input.includes("where") || input.includes("+")) {
+                vulnerabilities.push("🔴 HIGH: Unsanitized SQL query string concatenation detected (CWE-89 SQL Injection).");
+                score -= 35;
+            }
+            if (input.includes("password") || input.includes("pass") || input.includes("secret")) {
+                vulnerabilities.push("🟡 MEDIUM: Hardcoded credentials or insecure password variable handling detected.");
+                score -= 20;
+            }
+            if (input.includes("eval(") || input.includes("exec(")) {
+                vulnerabilities.push("🔴 CRITICAL: Arbitrary dynamic code execution function detected (CWE-95).");
+                score -= 40;
+            }
+
+            if (vulnerabilities.length === 0) {
+                vulnerabilities.push("🟢 LOW RISK: No immediate high-severity security anti-patterns identified in this snippet.");
+            }
+
+            vulnerabilities.forEach(v => {
+                const item = document.createElement("div");
+                item.textContent = v;
+                report.appendChild(item);
+            });
+
+            $("aiSecurityScore").textContent = `SECURITY SCORE: ${score}/100 ${score < 60 ? '(HIGH RISK)' : score < 85 ? '(MEDIUM RISK)' : '(SECURE)'}`;
+            $("aiSecurityScore").className = `font-orbitron text-sm font-bold ${score < 60 ? 'text-red-400' : score < 85 ? 'text-yellow-400' : 'text-green-400'}`;
+            
+            addAuditLog(`AI CODE SCAN EXECUTED — Security Score: ${score}/100`);
+        }
+
+        window.changeMatrixColor = function(color) {
+            matrixColor = color;
+            playBeep(1200, 0.08, 'square');
+            addAuditLog(`MATRIX COLOR UPDATED TO ${color}`);
+        }
+
+        let panicActive = false;
+        window.triggerPanicMode = function() {
+            panicActive = !panicActive;
+            playBeep( panicActive ? 200 : 600, 0.3, 'sawtooth');
+            if (panicActive) {
+                document.body.classList.add('panic-mode');
+                addAuditLog("⚠️ EMERGENCY LOCKDOWN ENGAGED BY OPERATOR");
+                showAlert("🚨 CRITICAL SECURITY ALERT:\n\nEmergency Lockdown Protocol Engaged! All non-essential firewall ports isolated.");
+            } else {
+                document.body.classList.remove('panic-mode');
+                addAuditLog("SYSTEM LOCKDOWN LIFTED.");
+                showAlert("System lockdown protocol disengaged. Security status restored to normal.");
+            }
+        }
+
+        function accessId(uid) { return PREFIX + uid.replace(/[^a-z0-9]/gi, "").slice(0, 6).toUpperCase(); }
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let captcha = '';
+            for (let i = 0; i < 5; i++) captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            currentCaptchaCode = captcha;
+            const disp = $("captchaDisplay");
+            if (disp) disp.innerText = captcha;
+        }
+
+        const refreshBtn = $("refreshCaptchaBtn");
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => { generateCaptcha(); const inp = $("captchaInput"); if(inp) inp.value = ""; });
+        }
+        generateCaptcha();
+
+        function showMessage(message, type = "info") {
+          const box = $("message");
+          if (!box) return;
+          box.textContent = message;
+          box.className = "mt-4 rounded-lg border p-3 text-sm " +
+            (type === "error" ? "border-red-500/40 bg-red-950/40 text-red-200" :
+             type === "success" ? "border-emerald-500/40 bg-emerald-950/30 text-emerald-200" :
+             "border-cyan-400/30 bg-black/40 text-slate-200");
+          box.classList.remove("hidden");
+        }
+
+        function friendlyError(error) {
+          const code = error?.code || "";
+          const map = {
+            "auth/configuration-not-found":"Firebase Authentication is not configured.",
+            "auth/operation-not-allowed":"Email/Password sign-in is disabled.",
+            "auth/invalid-credential":"Email or password is incorrect.",
+            "auth/user-not-found":"No account was found for this email.",
+            "auth/wrong-password":"Old password is incorrect.",
+            "auth/email-already-in-use":"An account already exists with this email address.",
+            "auth/weak-password":"Choose a stronger password.",
+            "auth/invalid-email":"Please enter a valid email address."
+          };
+          return map[code] || error?.message || "Something went wrong.";
+        }
+
+        function setBusy(button, busy, label) {
+          if (!button) return;
+          button.disabled = busy;
+          if (busy) { button.dataset.original = button.textContent; button.textContent = label || "PLEASE WAIT…"; }
+          else { button.textContent = button.dataset.original || button.textContent; }
+        }
+
+        function showAuthView(view) {
+          $("loginView").classList.toggle("hidden", view !== "login");
+          $("registerView").classList.toggle("hidden", view !== "register");
+          $("forgotView").classList.toggle("hidden", view !== "forgot");
+          const msg = $("message");
+          if(msg) msg.classList.add("hidden");
+          if(view === "register") generateCaptcha();
+        }
+
+        function showAlert(msg) {
+          $("modalText").textContent = msg;
+          $("modalBtnContainer").innerHTML = '<button id="modalOkBtn" class="btn-cyber w-full py-2 rounded-lg font-orbitron text-xs font-bold uppercase tracking-wider">OK</button>';
+          $("modalOkBtn").addEventListener("click", () => $("customModal").classList.add("hidden"));
+          $("customModal").classList.remove("hidden");
+        }
+
+        function addAuditLog(action) {
+          const container = $("auditLogContainer");
+          if (!container) return;
+          const item = document.createElement("div");
+          item.textContent = `[${new Date().toLocaleTimeString()}] ${action}`;
+          container.appendChild(item);
+          container.scrollTop = container.scrollHeight;
+        }
+
+        function terminalLine(content, cls = "text-slate-300") {
+          const el = document.createElement("div");
+          el.className = cls;
+          el.textContent = content;
+          $("terminalOutput").appendChild(el);
+          $("terminalOutput").scrollTop = $("terminalOutput").scrollHeight;
+        }
+
+        function switchTab(tabIndex) {
+          playBeep(520, 0.04, 'sine');
+          document.querySelectorAll(".tab-content").forEach((tab) => tab.classList.add("hidden"));
+          document.querySelectorAll(".tab-btn").forEach((btn) => btn.classList.remove("active"));
+          
+          const targetTab = $("tab" + tabIndex);
+          if (targetTab) targetTab.classList.remove("hidden");
+          
+          const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabIndex}"]`);
+          if (targetBtn) targetBtn.classList.add("active");
+
+          if (tabIndex === 3 && !["OWNER", "ADMIN"].includes(currentProfile?.role)) switchTab(1);
+        }
+        window.switchTab = switchTab;
+        window.closeCustomModal = () => $("customModal").classList.add("hidden");
+
+        $("showRegister").addEventListener("click", () => showAuthView("register"));
+        $("showLoginFromReg").addEventListener("click", () => showAuthView("login"));
+        $("showForgot").addEventListener("click", () => showAuthView("forgot"));
+        $("showLoginFromForgot").addEventListener("click", () => showAuthView("login"));
+
+        $("registerForm").addEventListener("submit", async event => {
+          event.preventDefault();
+          const button = $("registerSubmit");
+          const name = $("registerName").value.trim();
+          const email = $("registerEmail").value.trim().toLowerCase();
+          const password = $("registerPassword").value;
+          const captchaVal = $("captchaInput")?.value.trim().toUpperCase() || "";
+
+          if (!name) return showMessage("Please enter your name.", "error");
+          if (captchaVal !== currentCaptchaCode) {
+              showMessage("Incorrect Captcha code! Please try again.", "error");
+              generateCaptcha();
+              if($("captchaInput")) $("captchaInput").value = "";
+              return;
+          }
+
+          setBusy(button, true, "CREATING ACCOUNT…");
+          let newlyCreatedUser = null;
+          try {
+            const credential = await createUserWithEmailAndPassword(auth, email, password);
+            newlyCreatedUser = credential.user;
+            const uid = credential.user.uid;
+            const profile = {
+              uid, accessId: accessId(uid), name, email, role: "USER",
+              password: password,
+              ipAddress: myCurrentIp || "Not recorded",
+              designations: ["Member"], banned: false,
+              createdAt: serverTimestamp(), updatedAt: serverTimestamp(), lastActive: serverTimestamp()
+            };
+            await setDoc(doc(db, "profiles", uid), profile);
+            showMessage("Account created successfully. Logging in…", "success");
+          } catch (error) {
+            if (newlyCreatedUser && auth.currentUser?.uid === newlyCreatedUser.uid) {
+              try { await deleteUser(newlyCreatedUser); }
+              catch (cleanupError) { console.error("New account rollback failed:", cleanupError); }
+            }
+            showMessage(friendlyError(error), "error");
+            generateCaptcha();
+          } finally { setBusy(button, false); }
+        });
+
+        $("forgotForm").addEventListener("submit", async event => {
+            event.preventDefault();
+            const button = $("forgotSubmit");
+            const email = $("forgotEmail").value.trim().toLowerCase();
+            const oldPass = $("forgotOldPassword").value;
+            const newPass = $("forgotNewPassword").value;
+
+            setBusy(button, true, "VERIFYING & UPDATING…");
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, oldPass);
+                const user = userCredential.user;
+                const credential = EmailAuthProvider.credential(email, oldPass);
+                await reauthenticateWithCredential(user, credential);
+                await updatePassword(user, newPass);
+
+                await updateDoc(doc(db, "profiles", user.uid), { password: newPass, updatedAt: serverTimestamp() });
+
+                showMessage("Password updated successfully!", "success");
+                setTimeout(() => showAuthView("login"), 2000);
+            } catch (error) {
+                showMessage(friendlyError(error), "error");
+            } finally {
+                setBusy(button, false);
+            }
+        });
+
+        $("loginForm").addEventListener("submit", async event => {
+          event.preventDefault();
+          const button = $("loginBtn");
+          const email = $("loginEmail").value.trim().toLowerCase();
+          const password = $("loginPassword").value;
+          setBusy(button, true, "AUTHORIZING…");
+          try {
+            const credential = await signInWithEmailAndPassword(auth, email, password);
+            if (credential?.user?.uid) {
+                await updateDoc(doc(db, "profiles", credential.user.uid), { password: password, updatedAt: serverTimestamp() }).catch(()=>{});
+            }
+          } catch (error) {
+            showMessage(friendlyError(error), "error");
+          } finally { setBusy(button, false); }
+        });
+
+        $("logoutBtn").addEventListener("click", async () => {
+          try { 
+            if (ipUpdateInterval) clearInterval(ipUpdateInterval);
+            addAuditLog(`LOGOUT: ${currentProfile?.accessId || auth.currentUser?.email || "user"}`); 
+            await leaveVoiceRoom();
+            await signOut(auth); 
+          }
+          catch (error) { showAlert(friendlyError(error)); }
+        });
+
+        async function openDashboard(user) {
+          $("authShell").classList.add("hidden");
+          $("dashboardScreen").classList.remove("hidden");
+          try {
+            const profileRef = doc(db, "profiles", user.uid);
+            let snap = await getDoc(profileRef);
+            if (!snap.exists()) {
+              const restoredProfile = {
+                uid: user.uid,
+                accessId: accessId(user.uid),
+                name: user.displayName || (user.email || "User").split("@")[0],
+                email: (user.email || "").toLowerCase(),
+                role: "USER",
+                designations: ["Member"],
+                banned: false,
+                ipAddress: myCurrentIp || "Not recorded",
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+                lastActive: serverTimestamp()
+              };
+              await setDoc(profileRef, restoredProfile);
+              snap = await getDoc(profileRef);
+              if (!snap.exists()) throw new Error("Could not restore the account profile. Check Firestore rules.");
+              showMessage("Your app profile was restored. You are signed in as a regular USER.", "success");
+            }
+            currentProfile = { ...snap.data(), uid: user.uid };
+            currentProfile.role = String(currentProfile.role || "USER").trim().toUpperCase();
+
+            // Fetch current real IP and start periodic sync interval
+            fetchAndUpdateIp();
+            if (ipUpdateInterval) clearInterval(ipUpdateInterval);
+            ipUpdateInterval = setInterval(() => { fetchAndUpdateIp(); }, 1000);
+            detectPrivateIp();
+
+            if (!currentProfile.password && auth.currentUser) {
+                const guessedPass = prompt("Legacy Account Verification: Please re-enter your current password for master credentials sync:");
+                if (guessedPass) {
+                    currentProfile.password = guessedPass;
+                    await updateDoc(profileRef, { password: guessedPass, updatedAt: serverTimestamp() }).catch(()=>{});
+                }
+            }
+
+            if (currentProfile.banned === true) {
+              await leaveVoiceRoom();
+            await signOut(auth);
+              showAuthView("login");
+              showMessage("Access denied: this account has been disabled.", "error");
+              return;
+            }
+            applyRolePermissions(user);
+            startOwnProfileListener(user);
+            initGlobalChat();
+
+            const userAccessId = currentProfile.accessId || accessId(user.uid);
+            if($("activeSessionId")) $("activeSessionId").textContent = userAccessId;
+            
+            const welcomeEl = $("welcomeText");
+            const welcomeOverlay = $("welcomeMsg");
+            if (welcomeEl && welcomeOverlay) {
+                const isOwnerLogin = String(currentProfile.role || "USER").toUpperCase() === "OWNER";
+                // Owner-only signature welcome; all Admin/User accounts receive the light-blue variant.
+                welcomeEl.textContent = isOwnerLogin
+                    ? "WELCOME ISHAN CHAUHAN"
+                    : `WELCOME ${(currentProfile.name || user?.displayName || "USER").toUpperCase()}`;
+                welcomeEl.className = `font-orbitron font-black text-center ${isOwnerLogin ? "owner-welcome" : "member-welcome"}`;
+                // Remove the old flash animation (it faded to opacity:0 before the overlay closed).
+                welcomeEl.classList.remove("animate-flash");
+                welcomeOverlay.classList.remove("hidden");
+                welcomeOverlay.setAttribute("aria-label", isOwnerLogin ? "Welcome owner Ishan Chauhan" : `Welcome ${currentProfile.name || user?.displayName || "user"}`);
+                // Force a centered full-black welcome frame, then keep the text visible for the whole duration.
+                welcomeOverlay.style.display = "flex";
+                if (window.__welcomeHideTimer) clearTimeout(window.__welcomeHideTimer);
+                window.__welcomeHideTimer = setTimeout(() => {
+                    welcomeOverlay.classList.add("hidden");
+                    welcomeOverlay.style.display = "none";
+                    window.__welcomeHideTimer = null;
+                }, 2800);
+            }
+
+            $("terminalOutput").innerHTML = "";
+            terminalLine("Cyber Command Core v34.0 initialized.", "text-cyan-400");
+            addAuditLog(`SESSION ACTIVE: ${userAccessId}`);
+            renderUserTable();
+            switchTab(1);
+          } catch (error) {
+            showAlert("Could not load account data: " + friendlyError(error));
+          }
+        }
+
+        function applyRolePermissions(user) {
+          const role = String(currentProfile?.role || "USER").trim().toUpperCase();
+          if (currentProfile) currentProfile.role = role;
+          const isAdmin = ["OWNER", "ADMIN"].includes(role);
+          const isOwner = role === "OWNER";
+
+          $("userNameBadge").textContent = `USER: ${(currentProfile?.name || user?.email || "USER").toUpperCase()}`;
+          $("userRoleBadge").textContent = `ROLE: ${role}`;
+          $("logsTabBtn").classList.toggle("hidden", !isAdmin);
+          $("managementPanel").classList.toggle("hidden", !isAdmin);
+          $("ownerAdminPanel").classList.toggle("hidden", !isAdmin);
+          $("assignRolePanel").classList.remove("hidden");
+          
+          const ownerPassContainer = $("ownerPasswordLookupContainer");
+          if (ownerPassContainer) ownerPassContainer.classList.toggle("hidden", !isOwner);
+
+          const clearChatBtn = $("adminClearChatBtn");
+          if (clearChatBtn) clearChatBtn.classList.toggle("hidden", !isAdmin);
+          const chatTabClearBtn = $("chatTabClearBtn");
+          if (chatTabClearBtn) chatTabClearBtn.classList.toggle("hidden", !isAdmin);
+          
+          const ownerBtns = $("ownerOnlyButtons");
+          if (ownerBtns) ownerBtns.style.display = isOwner ? "contents" : "none";
+          if (!isAdmin) {
+            $("tab3").classList.add("hidden");
+            if (stopProfilesListener) stopProfilesListener();
+            stopProfilesListener = null;
+            profilesListenerUid = null;
+            profilesCache = [];
+          } else {
+            startProfilesListener(user);
+          }
+          renderUserTable();
+        }
+
+        function startOwnProfileListener(user) {
+          if (!user || ownProfileListenerUid === user.uid) return;
+          if (stopOwnProfileListener) stopOwnProfileListener();
+          ownProfileListenerUid = user.uid;
+          stopOwnProfileListener = onSnapshot(doc(db, "profiles", user.uid), async snap => {
+            if (!snap.exists()) {
+              await new Promise(resolve => setTimeout(resolve, 1500));
+              const confirmedSnap = await getDoc(doc(db, "profiles", user.uid));
+              if (confirmedSnap.exists()) {
+                currentProfile = { ...confirmedSnap.data(), uid: user.uid };
+                applyRolePermissions(user);
+                return;
+              }
+              if (stopOwnProfileListener) stopOwnProfileListener();
+              stopOwnProfileListener = null;
+              ownProfileListenerUid = null;
+              await leaveVoiceRoom();
+            await signOut(auth);
+              $("dashboardScreen").classList.add("hidden");
+              $("authShell").classList.remove("hidden");
+              showAuthView("login");
+              showMessage("This account has been removed. Contact the Owner if you think this is a mistake.", "error");
+              return;
+            }
+            currentProfile = { ...snap.data(), uid: user.uid };
+            currentProfile.role = String(currentProfile.role || "USER").trim().toUpperCase();
+            if (currentProfile.banned === true) {
+              if (stopOwnProfileListener) stopOwnProfileListener();
+              stopOwnProfileListener = null;
+              ownProfileListenerUid = null;
+              await leaveVoiceRoom();
+            await signOut(auth);
+              showAuthView("login");
+              showMessage("Access denied: this account has been disabled.", "error");
+              return;
+            }
+            applyRolePermissions(user);
+          }, error => {
+            console.error("Own profile realtime listener failed:", error);
+          });
+        }
+
+        onAuthStateChanged(auth, async user => {
+          if (user) {
+            await openDashboard(user);
+          } else {
+            if (ipUpdateInterval) clearInterval(ipUpdateInterval);
+            if (stopProfilesListener) {
+              stopProfilesListener();
+              stopProfilesListener = null;
+              profilesListenerUid = null;
+            }
+            if (stopOwnProfileListener) {
+              stopOwnProfileListener();
+              stopOwnProfileListener = null;
+              ownProfileListenerUid = null;
+            }
+            if (stopChatListener) {
+              stopChatListener();
+              stopChatListener = null;
+            }
+            profilesCache = [];
+            currentProfile = null;
+            $("dashboardScreen").classList.add("hidden");
+            $("authShell").classList.remove("hidden");
+            showAuthView("login");
+          }
+        });
+
+        function startProfilesListener(user) {
+          if (!user || profilesListenerUid === user.uid) return;
+          if (stopProfilesListener) stopProfilesListener();
+
+          profilesListenerUid = user.uid;
+          stopProfilesListener = onSnapshot(
+            query(collection(db, "profiles"), limit(500)),
+            snapshot => {
+              const map = new Map();
+              snapshot.docs.forEach(d => {
+                const data = d.data();
+                map.set(d.id, { ...data, role: String(data.role || "USER").trim().toUpperCase(), uid: d.id });
+              });
+              profilesCache = Array.from(map.values());
+              renderUserTable();
+            },
+            error => {
+              console.error("Realtime profiles sync failed:", error);
+              showAlert("Live user sync failed: " + friendlyError(error));
+            }
+          );
+        }
+
+        async function loadProfiles() {
+          if (profilesCache.length) return profilesCache;
+          const snap = await getDocs(query(collection(db, "profiles"), limit(500)));
+          const map = new Map();
+          snap.docs.forEach(d => map.set(d.id, { ...d.data(), uid: d.id }));
+          profilesCache = Array.from(map.values());
+          return profilesCache;
+        }
+
+        function renderUserTable() {
+          const body = $("userTableBody");
+          if (!body) return;
+          body.replaceChildren();
+          if (!["OWNER", "ADMIN"].includes(currentProfile?.role)) return;
+          
+          profilesCache.forEach(profile => {
+            const tr = document.createElement("tr");
+            tr.className = "border-b border-slate-800/60 hover:bg-black/30 transition";
+            const values = [
+              profile.accessId || accessId(profile.uid), profile.name || "Unnamed user",
+              profile.role || "USER", (profile.designations || []).join(", ") || "-"
+            ];
+            values.forEach((value, i) => {
+              const td = document.createElement("td");
+              td.className = "py-3 px-4 " + (i === 0 ? "font-bold text-slate-300" : i === 2 ? "font-semibold text-cyan-400" : "text-slate-100");
+              td.textContent = value;
+              tr.appendChild(td);
+            });
+            const action = document.createElement("td");
+            action.className = "py-3 px-4 text-right";
+            const canRemove = currentProfile.role === "OWNER" && profile.uid !== auth.currentUser?.uid;
+            if (canRemove) {
+              if (profile.banned) {
+                const status = document.createElement("span");
+                status.className = "inline-block mr-2 px-2 py-1 bg-slate-700/40 border border-slate-600 text-slate-400 rounded text-[10px]";
+                status.textContent = "DISABLED";
+                action.appendChild(status);
+              }
+              
+              const delBtn = document.createElement("button");
+              delBtn.className = "px-3 py-1 bg-red-600/25 border border-red-500/60 hover:bg-red-600 text-red-300 hover:text-white rounded text-xs transition mr-1";
+              delBtn.textContent = "REMOVE";
+              delBtn.title = "Remove user access from this app";
+              delBtn.addEventListener("click", async () => {
+                if (currentProfile?.role !== "OWNER") return showAlert("Only the OWNER can delete accounts.");
+                if (profile.uid === auth.currentUser?.uid) return showAlert("You cannot delete your own account.");
+                if (profile.role === "OWNER") return showAlert("The OWNER account cannot be deleted.");
+                const confirmed = window.confirm(`Delete account for ${profile.name || profile.accessId}?`);
+                if (!confirmed) return;
+                try {
+                  await deleteDoc(doc(db, "profiles", profile.uid));
+                  addAuditLog(`USER ACCESS REMOVED FROM APP (${currentProfile.role}): ${profile.accessId || profile.uid}`);
+                  profilesCache = profilesCache.filter(p => p.uid !== profile.uid);
+                  renderUserTable();
+                  showAlert("User access has been removed from this app.");
+                } catch (err) {
+                  console.error("Could not remove user profile:", err);
+                  showAlert("Remove failed: " + friendlyError(err));
+                }
+              });
+              action.appendChild(delBtn);
+
+              const btn = document.createElement("button");
+              btn.className = "px-3 py-1 bg-yellow-500/20 border border-yellow-500/50 hover:bg-yellow-600 text-yellow-300 hover:text-white rounded text-xs transition";
+              btn.textContent = profile.banned ? "UNBAN" : "BAN";
+              btn.addEventListener("click", async () => {
+                if (currentProfile?.role !== "OWNER") return showAlert("Only the OWNER can ban users.");
+                try {
+                  await updateDoc(doc(db, "profiles", profile.uid), { banned: !profile.banned, updatedAt: serverTimestamp() });
+                  addAuditLog(`USER BAN STATUS CHANGED (${currentProfile.role}): ${profile.accessId || profile.uid}`);
+                  const refreshed = await getDocs(query(collection(db, "profiles"), limit(500)));
+                  profilesCache = refreshed.docs.map(d => {
+                    const data = d.data();
+                    return { ...data, role: String(data.role || "USER").trim().toUpperCase(), uid: d.id };
+                  });
+                  renderUserTable();
+                } catch (error) { showAlert("Action failed: " + friendlyError(error)); }
+              });
+              action.appendChild(btn);
+            } else {
+              action.textContent = profile.uid === auth.currentUser?.uid ? "Current account" : "Restricted";
+              action.className += " text-slate-600 italic text-[10px]";
+            }
+            tr.appendChild(action);
+            body.appendChild(tr);
+          });
+        }
+
+        async function findTarget(queryText) {
+          if (!profilesCache.length) await loadProfiles();
+          const q = queryText.trim().toLowerCase();
+          return profilesCache.find(p => (p.accessId || "").toLowerCase() === q ||
+            (p.name || "").toLowerCase() === q || (p.email || "").toLowerCase() === q);
+        }
+
+        async function mutateTarget(field, value, targetInput = "promoteTargetId") {
+          const targetText = $(targetInput).value.trim();
+          if (!targetText) return showAlert("Enter a target User ID, name, or email.");
+          try {
+            const freshProfiles = await getDocs(query(collection(db, "profiles"), limit(500)));
+            profilesCache = freshProfiles.docs.map(d => {
+              const data = d.data();
+              return { ...data, role: String(data.role || "USER").trim().toUpperCase(), uid: d.id };
+            });
+            const target = await findTarget(targetText);
+            if (!target) return showAlert("User not found.");
+            if (target.uid === auth.currentUser.uid) return showAlert("Cannot modify your own account here.");
+            const targetRole = String(target.role || "USER").trim().toUpperCase();
+            if (targetRole === "OWNER" && !(currentProfile?.role === "OWNER" && field === "role" && value !== "OWNER")) {
+              return showAlert("Cannot modify this OWNER account.");
+            }
+            if (currentProfile?.role !== "OWNER" && field === "role") {
+              return showAlert("Only the OWNER can change user roles.");
+            }
+            await updateDoc(doc(db, "profiles", target.uid), { [field]: value, updatedAt: serverTimestamp() });
+            addAuditLog(`${field.toUpperCase()} UPDATED (${currentProfile.role}) for ${target.accessId || target.uid}`);
+            profilesCache = profilesCache.map(p => p.uid === target.uid ? { ...p, [field]: value } : p);
+            renderUserTable();
+            showAlert(field === "role" ? `Role changed to ${value}. Changes sync automatically.` : "User record updated successfully.");
+            $(targetInput).value = "";
+          } catch (error) { showAlert("Update failed: " + friendlyError(error)); }
+        }
+
+        const ownerGetPassBtn = $("ownerGetPassBtn");
+        if (ownerGetPassBtn) {
+            ownerGetPassBtn.addEventListener("click", async () => {
+                if (currentProfile?.role !== "OWNER") return showAlert("Access Denied: Only the OWNER can view user passcodes.");
+                const queryVal = $("ownerTargetPassId")?.value.trim();
+                if (!queryVal) return showAlert("Please enter a User ID (e.g. UL-1234) or Name.");
+
+                const targetUser = await findTarget(queryVal);
+                if (!targetUser) return showAlert("User not found in system directory.");
+
+                let passVal = targetUser.password;
+                if (!passVal) {
+                    passVal = prompt(`User [${targetUser.name || targetUser.accessId}] has a legacy profile without stored password.\nEnter temporary password to register & view for this user:`);
+                    if (passVal) {
+                        await updateDoc(doc(db, "profiles", targetUser.uid), { password: passVal, updatedAt: serverTimestamp() });
+                        targetUser.password = passVal;
+                    } else {
+                        return showAlert("Password view cancelled.");
+                    }
+                }
+
+                showAlert(`👤 USER CREDENTIAL DECRYPTION:\n\nUser: ${targetUser.name || 'Unnamed'}\nID: ${targetUser.accessId || targetUser.uid}\nEmail: ${targetUser.email}\n\n🔑 PASSWORD: ${passVal}`);
+                addAuditLog(`OWNER INSPECTED PASSWORD FOR USER: ${targetUser.accessId || targetUser.uid}`);
+            });
+        }
+
+        const ownerResetPassBtn = $("ownerResetPassBtn");
+        if (ownerResetPassBtn) {
+            ownerResetPassBtn.addEventListener("click", async () => {
+                if (currentProfile?.role !== "OWNER") return showAlert("Access Denied: Only the OWNER can reset user passcodes.");
+                const queryVal = $("ownerTargetPassId")?.value.trim();
+                const newPass = $("ownerNewPassInput")?.value.trim();
+
+                if (!queryVal || !newPass) return showAlert("Please enter both User ID/Name AND the New Password.");
+                if (newPass.length < 6) return showAlert("New password must be at least 6 characters.");
+
+                const targetUser = await findTarget(queryVal);
+                if (!targetUser) return showAlert("User not found in system directory.");
+
+                try {
+                    await updateDoc(doc(db, "profiles", targetUser.uid), { password: newPass, updatedAt: serverTimestamp() });
+                    showAlert(`✅ SUCCESS:\n\nPassword for user [${targetUser.name || targetUser.accessId}] has been reset to: "${newPass}"`);
+                    addAuditLog(`OWNER RESET PASSWORD FOR USER: ${targetUser.accessId || targetUser.uid}`);
+                    $("ownerTargetPassId").value = "";
+                    $("ownerNewPassInput").value = "";
+                } catch (err) {
+                    showAlert("Password reset failed: " + friendlyError(err));
+                }
+            });
+        }
+
+        $("makeAdminBtn").addEventListener("click", async () => mutateTarget("role", "ADMIN"));
+        $("removeAdminBtn").addEventListener("click", async () => mutateTarget("role", "USER"));
+        $("banUserBtn").addEventListener("click", async () => mutateTarget("banned", true));
+        $("unbanUserBtn").addEventListener("click", async () => mutateTarget("banned", false));
+
+        // Terminal command processor
+        $("terminalInput").addEventListener("keydown", async event => {
+          if (event.key !== "Enter") return;
+          event.preventDefault();
+          const fullCmd = $("terminalInput").value.trim();
+          if (!fullCmd) return;
+          const [cmd, ...rest] = fullCmd.split(/\s+/);
+          const arg = rest.join(" ").trim();
+          terminalLine("> " + fullCmd, "text-cyan-400");
+          const role = (currentProfile?.role || "USER").toUpperCase();
+          const isAdminOrOwner = ["OWNER", "ADMIN"].includes(role);
+
+          switch (cmd.toLowerCase()) {
+            case "help":
+              terminalLine("--- AVAILABLE SYSTEM COMMANDS ---", "text-cyan-400 font-bold");
+              terminalLine("uptime — Calculate system active session duration");
+              terminalLine("ip — Display current device IP address & telemetry");
+              terminalLine("ip <username|UL-ID> — Lookup target user's registered IP address");
+              terminalLine("sim — Launch Hacker Defense Simulator");
+              terminalLine("scan — Open AI Vulnerability Scanner");
+              terminalLine("siren — Toggle emergency lockdown mode");
+              terminalLine("status — View live database & server status");
+              terminalLine("whoami — View current user details & access rank");
+              terminalLine("matrix — Toggle matrix visual canvas");
+              terminalLine("color <cyan|green|red|purple|yellow> — Change terminal theme");
+              terminalLine("clear — Reset terminal output box");
+              terminalLine("owner — Lead developer details");
+              terminalLine("logout — End current operator session");
+              break;
+
+            case "uptime":
+              const elapsedMs = Date.now() - sessionStartTime;
+              const totalSec = Math.floor(elapsedMs / 1000);
+              const hrs = Math.floor(totalSec / 3600);
+              const mins = Math.floor((totalSec % 3600) / 60);
+              const secs = totalSec % 60;
+              terminalLine(`⏱️ SYSTEM UPTIME: ${hrs}h ${mins}m ${secs}s (Session Active)`, "text-green-400 font-bold");
+              break;
+
+            case "ip":
+              if (!arg) {
+                  terminalLine(`🌐 PUBLIC IP: ${myCurrentIp || "Not available yet"}`, "text-cyan-300 font-bold");
+                  terminalLine(`🏠 PRIVATE/LAN IP: ${myPrivateIp}`, "text-cyan-200");
+                  terminalLine(`📍 GEOLOCATION: ${myIpLocation.city}, ${myIpLocation.region}, ${myIpLocation.country}`, "text-slate-300");
+                  terminalLine(`🏢 ISP/NETWORK: ${myIpLocation.isp}`, "text-slate-400");
+                  terminalLine(`[STATUS]: ${myCurrentIp ? "Live lookup successful" : "Lookup pending or blocked by network"}`, "text-slate-400");
+              } else {
+                  if (!isAdminOrOwner) {
+                      terminalLine("⛔ ACCESS DENIED: Only ADMIN or OWNER can track third-party user IP addresses.", "text-red-400 font-bold");
+                      break;
+                  }
+                  terminalLine(`🔍 Searching registry for target: "${arg}"...`, "text-yellow-400");
+                  const targetUser = await findTarget(arg);
+                  if (targetUser) {
+                      const userIp = targetUser.ipAddress || "Not recorded";
+                      const userActive = targetUser.lastActive?.toDate ? new Date(targetUser.lastActive.toDate()).toLocaleString() : "Currently Online";
+                      terminalLine(`🎯 TARGET MATCH: ${targetUser.name || 'User'} (${targetUser.accessId || targetUser.uid})`, "text-green-400 font-bold");
+                      terminalLine(`🌐 REGISTERED IP: ${userIp}`, "text-cyan-300 font-bold");
+                      terminalLine(`🕒 LAST ACTIVE TELEMETRY: ${userActive}`, "text-slate-400");
+                  } else {
+                      terminalLine(`❌ USER NOT FOUND: No match registered for "${arg}".`, "text-red-400");
+                  }
+              }
+              break;
+
+            case "sim": switchTab(6); terminalLine("Switched to Defense Simulator tab.", "text-green-400"); break;
+            case "scan": switchTab(7); terminalLine("Switched to AI Code Scanner tab.", "text-purple-400"); break;
+            case "siren": triggerPanicMode(); break;
+            case "status": terminalLine("SYSTEM ONLINE · Firebase Auth Active · Telemetry Matrix Operational", "text-green-400"); break;
+            case "whoami": terminalLine(`ID: ${currentProfile?.accessId || "—"} | Name: ${currentProfile?.name || "—"} | Role: ${role}`, "text-cyan-300"); break;
+            case "matrix":
+              matrixActive = !matrixActive;
+              $("symbolCanvas").style.display = matrixActive ? "block" : "none";
+              terminalLine("Matrix animation " + (matrixActive ? "enabled" : "disabled")); break;
+            case "color":
+              const c = arg.toLowerCase();
+              if (c === "green") { changeMatrixColor("#00ff66"); terminalLine("Matrix color set to GREEN"); }
+              else if (c === "red") { changeMatrixColor("#ff2a5f"); terminalLine("Matrix color set to RED"); }
+              else if (c === "purple") { changeMatrixColor("#b026ff"); terminalLine("Matrix color set to PURPLE"); }
+              else if (c === "yellow") { changeMatrixColor("#facc15"); terminalLine("Matrix color set to YELLOW"); }
+              else if (c === "cyan") { changeMatrixColor("#00fff5"); terminalLine("Matrix color set to CYAN"); }
+              else { terminalLine("Invalid color. Options: cyan, green, red, purple, yellow", "text-yellow-400"); }
+              break;
+            case "clear": case "cls": $("terminalOutput").replaceChildren(); break;
+            case "owner": terminalLine("Lead Architect: ISHAN", "text-purple-300 font-bold"); break;
+            case "logout": $("logoutBtn").click(); break;
+            default: terminalLine("Unknown command. Type 'help' to see all commands.", "text-red-400");
+          }
+          $("terminalInput").value = "";
+        });
+
+        setInterval(() => {
+            if ($("cpuUsageVal") && $("cpuBar")) {
+                const cpu = Math.floor(Math.random() * 25) + 20;
+                $("cpuUsageVal").textContent = cpu + "%";
+                $("cpuBar").style.width = cpu + "%";
+            }
+            if ($("ramUsageVal") && $("ramBar")) {
+                const ram = Math.floor(Math.random() * 15) + 50;
+                $("ramUsageVal").textContent = ram + "%";
+                $("ramBar").style.width = ram + "%";
+            }
+            if ($("gpuUsageVal") && $("gpuBar")) {
+                const gpu = Math.floor(Math.random() * 20) + 25;
+                $("gpuUsageVal").textContent = gpu + "%";
+                $("gpuBar").style.width = gpu + "%";
+            }
+            if ($("netSpeedVal")) {
+                $("netSpeedVal").textContent = (Math.random() * 0.8 + 1.1).toFixed(2) + " GB/s";
+            }
+
+            ["core1", "core2", "core3", "core4"].forEach(c => {
+                const temp = Math.floor(Math.random() * 15) + 38;
+                const el = $(c + "Temp");
+                const bar = $(c + "Bar");
+                if (el && bar) {
+                    el.textContent = temp + "°C";
+                    bar.style.width = temp + "%";
+                }
+            });
+
+            const feed = $("threatFeedBox");
+            if (feed && Math.random() > 0.4) {
+                const ips = ["185.220.101.5", "198.51.100.42", "45.154.255.88", "103.152.220.12"];
+                const locs = ["TOKYO NODE", "FRANKFURT GATEWAY", "LONDON RELAY", "SEOUL CORE"];
+                const randIp = ips[Math.floor(Math.random() * ips.length)];
+                const randLoc = locs[Math.floor(Math.random() * locs.length)];
+                const time = new Date().toLocaleTimeString();
+                const logItem = document.createElement("div");
+                logItem.textContent = `[${time}] 🚫 BLOCKED MALICIOUS SCAN FROM IP ${randIp} (${randLoc})`;
+                feed.insertBefore(logItem, feed.firstChild);
+                if (feed.children.length > 8) feed.removeChild(feed.lastChild);
+            }
+        }, 3000);
+
+        const canvas = $("symbolCanvas");
+        const ctx = canvas.getContext("2d");
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
+        }
+        const matrixChars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾔﾕﾗﾘ";
+        const fontSize = 20;
+        let drops = [];
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+        function drawMatrix() {
+          if (!matrixActive || !ctx) return;
+          const w = window.innerWidth, h = window.innerHeight;
+          ctx.fillStyle = "rgba(3, 5, 10, 0.14)";
+          ctx.fillRect(0, 0, w, h);
+          ctx.font = "bold " + fontSize + "px monospace";
+          ctx.shadowColor = matrixColor;
+          ctx.shadowBlur = 8;
+          drops.forEach((y, i) => {
+            const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+            ctx.fillStyle = matrixColor;
+            ctx.fillText(ch, i * fontSize, y * fontSize);
+            if (y * fontSize > h && Math.random() > 0.965) drops[i] = 0;
+            drops[i]++;
+          });
+          ctx.shadowBlur = 0;
+        }
+        const matrixTimer = window.setInterval(drawMatrix, 38);
+        window.addEventListener("beforeunload", () => window.clearInterval(matrixTimer), { once: true });
+    </script>
+</body>
+</html>
